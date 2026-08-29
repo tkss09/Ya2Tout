@@ -485,6 +485,228 @@
             background: var(--accent);
         }
 
+        /* --- POP-UP / MODALE DÉTAIL PRODUIT --- */
+        .product-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 4000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .product-modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .product-modal-content {
+            background: #ffffff;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 20px;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+
+        .product-modal-overlay.open .product-modal-content {
+            transform: translateY(0);
+        }
+
+        .close-product-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.1);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: var(--primary);
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .close-product-modal:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .modal-gallery {
+            background: #f9f9fb;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-main-img-container {
+            width: 100%;
+            height: 320px;
+            position: relative;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-in; /* Indique qu'on peut cliquer pour agrandir */
+        }
+
+        .modal-main-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .modal-main-img-container:hover img {
+            transform: scale(1.03);
+        }
+
+        /* --- MODE PLEIN ÉCRAN POUR LA PHOTO DU POP-UP --- */
+        .image-fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            cursor: zoom-out;
+        }
+
+        .image-fullscreen-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .image-fullscreen-overlay img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .close-fullscreen {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .close-fullscreen:hover {
+            background: var(--accent);
+        }
+
+        .modal-thumbs {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            width: 100%;
+            padding-bottom: 5px;
+        }
+
+        .modal-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            overflow: hidden;
+            background: #fff;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .modal-thumb.active, .modal-thumb:hover {
+            border-color: var(--accent);
+        }
+
+        .modal-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-details {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .modal-cat {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #71717a;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .modal-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .modal-description {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.5;
+            border-top: 1px solid #eaeaea;
+            border-bottom: 1px solid #eaeaea;
+            padding: 12px 0;
+        }
+
         /* --- MODALES COMMUNES --- */
         .order-tracking-overlay, .size-guide-overlay, .returns-overlay, .contact-overlay {
             position: fixed;
@@ -1078,6 +1300,7 @@
             position: relative;
             color: #71717a;
             font-size: 2.5rem;
+            cursor: pointer;
         }
 
         .slider-container {
@@ -1174,6 +1397,12 @@
             font-size: 0.95rem;
             font-weight: 700;
             margin-bottom: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .product-name:hover {
+            color: var(--accent);
         }
 
         .size-selector {
@@ -1318,6 +1547,9 @@
             .footer-content {
                 grid-template-columns: 1fr 1fr;
             }
+            .product-modal-content {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1326,7 +1558,6 @@
                 flex-wrap: wrap;
                 gap: 10px;
             }
-            /* CORRECTION MOBILE : Transformation du menu de navigation en bandeau horizontal défilable */
             .nav-links {
                 display: flex;
                 order: 3;
@@ -1338,7 +1569,7 @@
                 -webkit-overflow-scrolling: touch;
             }
             .nav-links::-webkit-scrollbar {
-                display: none; /* Masque la barre de défilement pour un look épuré */
+                display: none;
             }
             .hero {
                 padding: 0 10px;
@@ -1420,6 +1651,44 @@
                 </div>
             </form>
         </div>
+    </div>
+
+    <!-- POP-UP DÉTAIL PRODUIT AVEC DESCRIPTION ET MULTI-PHOTOS -->
+    <div class="product-modal-overlay" id="productModalOverlay" onclick="closeProductModal()">
+        <div class="product-modal-content" onclick="event.stopPropagation()">
+            <button class="close-product-modal" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-gallery">
+                <div class="modal-main-img-container" onclick="openFullscreenImage()">
+                    <img id="modalMainImg" src="" alt="Vue principale du produit">
+                </div>
+                <div class="modal-thumbs" id="modalThumbsContainer">
+                    <!-- Les miniatures s'injecteront dynamiquement ici -->
+                </div>
+            </div>
+            <div class="modal-details">
+                <div>
+                    <span class="modal-cat" id="modalCategory">Catégorie</span>
+                    <h2 class="modal-title" id="modalTitle">Nom du produit</h2>
+                    <div class="modal-price" id="modalPrice" style="margin: 10px 0;">0,00 €</div>
+                    <p class="modal-description" id="modalDescription">Description détaillée du produit...</p>
+                </div>
+                <div>
+                    <div class="size-selector" style="margin-bottom: 15px;">
+                        <span class="size-label">Sélectionner une taille / option :</span>
+                        <div class="size-options" id="modalSizeOptions">
+                            <!-- Options de taille dynamiques -->
+                        </div>
+                    </div>
+                    <button class="checkout-btn" onclick="addModalToCart()"><i class="fa-solid fa-bag-shopping"></i> Ajouter au panier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SURCOUCHE PLEIN ÉCRAN POUR L'IMAGE DU POP-UP -->
+    <div class="image-fullscreen-overlay" id="imageFullscreenOverlay" onclick="closeFullscreenImage()">
+        <button class="close-fullscreen" onclick="closeFullscreenImage()"><i class="fa-solid fa-xmark"></i></button>
+        <img id="fullscreenImg" src="" alt="Vue en plein écran">
     </div>
 
     <!-- Modale de Suivi de Commande -->
@@ -1693,7 +1962,7 @@
         <div class="navbar">
             <div class="logo" onclick="filterCategory('tous')">Ya 2 <span>Tout</span></div>
             <ul class="nav-links">
-                <li onclick="filterCategory('tous')" class="active-nav" id="nav-tous">Nouveautés</li>
+                <li onclick="filterCategory('tous')" class="active-nav" id="nav-tous">Accueil</li>
                 <li onclick="filterCategory('t-shirts')" id="nav-t-shirts">T-shirts</li>
                 <li onclick="filterCategory('baskets')" id="nav-baskets">Baskets & Sneakers</li>
                 <li onclick="filterCategory('ensembles')" id="nav-ensembles">Ensembles</li>
@@ -1746,20 +2015,27 @@
         <div class="product-grid">
             
             <!-- T-shirt CP Company -->
-            <div class="product-card" data-category="t-shirts" data-name="T-shirt CP Company" data-price="45.00" data-price-formatted="45,00 €" data-img="https://cdn.media.amplience.net/i/frasersdev/59157303_o?fmt=auto&upscale=true&w=1920&h=1920&v=20251216173317&sm=scaleFit&$h-ttl$">
-                <div class="product-image" style="background: none; padding: 0;">
+            <div class="product-card" 
+                 data-category="t-shirts" 
+                 data-name="T-shirt CP Company" 
+                 data-price="45.00" 
+                 data-price-formatted="45,00 €" 
+                 data-desc="Confectionné en coton organique de première qualité, ce t-shirt C.P. Company allie confort absolu et design urbain épuré. Il arbore la signature iconique de la marque sur la poitrine. Coupe ajustée et finitions renforcées pour une durabilité optimale au quotidien."
+                 data-images='["https://cdn.media.amplience.net/i/frasersdev/59157303_o?fmt=auto&upscale=true&w=1920&h=1920&v=20251216173317&sm=scaleFit&$h-ttl$", "https://cdn.media.amplience.net/i/frasersdev/59157303_o_a1?fmt=auto&upscale=false&w=1200&h=1200&v=20251216173135&sm=scaleFit&$h-ttl$"]'
+                 data-sizes='["S", "M", "L", "XL"]'>
+                <div class="product-image" style="background: none; padding: 0;" onclick="openProductModal(this.closest('.product-card'))">
                     <span class="badge">Nouveau</span>
                     <div class="slider-container">
                         <div class="slide active"><img src="https://cdn.media.amplience.net/i/frasersdev/59157303_o?fmt=auto&upscale=true&w=1920&h=1920&v=20251216173317&sm=scaleFit&$h-ttl$" alt="1"></div>
                         <div class="slide"><img src="https://cdn.media.amplience.net/i/frasersdev/59157303_o_a1?fmt=auto&upscale=false&w=1200&h=1200&v=20251216173135&sm=scaleFit&$h-ttl$" alt="2"></div>
-                        <button class="slider-btn prev-btn" onclick="changeSlide(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button class="slider-btn next-btn" onclick="changeSlide(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                        <button class="slider-btn prev-btn" onclick="event.stopPropagation(); changeSlide(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="slider-btn next-btn" onclick="event.stopPropagation(); changeSlide(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
                 <div class="product-info">
                     <div>
                         <div class="product-category">T-shirts</div>
-                        <div class="product-name">T-shirt CP Company</div>
+                        <div class="product-name" onclick="openProductModal(this.closest('.product-card'))">T-shirt CP Company</div>
                         <div class="size-selector">
                             <span class="size-label">Sélectionner une taille :</span>
                             <div class="size-options">
@@ -1777,23 +2053,30 @@
                 </div>
             </div>
 
-            <!-- PRODUIT 1 -->
-            <div class="product-card" data-category="ensembles" data-name="Nike x NOCTA Tech Fleece Ensemble BLACK" data-price="100.00" data-price-formatted="100,00 €" data-img="https://macanstory.com/cdn/shop/files/1_114001ae-df9a-4384-a5a8-b3007cdbf6ac.webp?v=1742910399&width=600">
-                <div class="product-image" style="background: none; padding: 0;">
+            <!-- Nike x NOCTA Tech Fleece Ensemble BLACK -->
+            <div class="product-card" 
+                 data-category="ensembles" 
+                 data-name="Nike x NOCTA Tech Fleece Ensemble BLACK" 
+                 data-price="100.00" 
+                 data-price-formatted="100,00 €" 
+                 data-desc="L'ensemble ultime issu de la collaboration exclusive Nike x NOCTA. Conçu dans un tissu Tech Fleece ultra-doux et isolant, il offre une liberté de mouvement totale tout en affichant un style streetwear technique haut de gamme. Doté de zips étanches et de finitions réfléchissantes."
+                 data-images='["https://macanstory.com/cdn/shop/files/1_114001ae-df9a-4384-a5a8-b3007cdbf6ac.webp?v=1742910399&width=600", "https://macanstory.com/cdn/shop/files/2_3dca09cc-732e-49ab-bbc0-cb2ef4f8c427.webp?v=1742910399&width=600", "https://macanstory.com/cdn/shop/files/1_6ac6ee6f-c0cc-439e-9e4a-e7f51eb46721.webp?v=1742657674&width=600", "https://macanstory.com/cdn/shop/files/2_a59e169d-1f7a-4027-8fbe-78effb5a5d19.webp?v=1742657674&width=600"]'
+                 data-sizes='["XS", "S", "M", "L", "XL", "XXL"]'>
+                <div class="product-image" style="background: none; padding: 0;" onclick="openProductModal(this.closest('.product-card'))">
                     <span class="badge">Tendance</span>
                     <div class="slider-container">
                         <div class="slide active"><img src="https://macanstory.com/cdn/shop/files/1_114001ae-df9a-4384-a5a8-b3007cdbf6ac.webp?v=1742910399&width=600" alt="1"></div>
                         <div class="slide"><img src="https://macanstory.com/cdn/shop/files/2_3dca09cc-732e-49ab-bbc0-cb2ef4f8c427.webp?v=1742910399&width=600" alt="2"></div>
                         <div class="slide"><img src="https://macanstory.com/cdn/shop/files/1_6ac6ee6f-c0cc-439e-9e4a-e7f51eb46721.webp?v=1742657674&width=600" alt="3"></div>
                         <div class="slide"><img src="https://macanstory.com/cdn/shop/files/2_a59e169d-1f7a-4027-8fbe-78effb5a5d19.webp?v=1742657674&width=600" alt="4"></div>
-                        <button class="slider-btn prev-btn" onclick="changeSlide(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button class="slider-btn next-btn" onclick="changeSlide(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                        <button class="slider-btn prev-btn" onclick="event.stopPropagation(); changeSlide(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="slider-btn next-btn" onclick="event.stopPropagation(); changeSlide(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
                 <div class="product-info">
                     <div>
                         <div class="product-category">Ensembles</div>
-                        <div class="product-name">Nike x NOCTA Tech Fleece Ensemble BLACK</div>
+                        <div class="product-name" onclick="openProductModal(this.closest('.product-card'))">Nike x NOCTA Tech Fleece Ensemble BLACK</div>
                         <div class="size-selector">
                             <span class="size-label">Sélectionner une taille :</span>
                             <div class="size-options">
@@ -1813,22 +2096,29 @@
                 </div>
             </div>
 
-            <!-- PRODUIT 2 -->
-            <div class="product-card" data-category="baskets" data-name="Nike Air Max Tailwind V x Skepta" data-price="80.00" data-price-formatted="80,00 €" data-img="https://static.nike.com/a/images/w_1280,q_auto,f_auto/8f7678d4-a738-4899-a1a0-93ce8f220a62/date-de-sortie-de-la-air-max-tailwind%C2%A0v-x-skepta-%C2%AB%C2%A0chrome-blue%C2%A0%C2%BB.jpg">
-                <div class="product-image" style="background: none; padding: 0;">
+            <!-- Nike Air Max Tailwind V x Skepta -->
+            <div class="product-card" 
+                 data-category="baskets" 
+                 data-name="Nike Air Max Tailwind V x Skepta" 
+                 data-price="80.00" 
+                 data-price-formatted="80,00 €" 
+                 data-desc="Issue de la collaboration entre Nike et l'artiste Skepta, cette Air Max Tailwind V se distingue par son empeigne inspirée de la nature et ses empiècements chromés texturés. Dotée d'unités Air-Sole visibles pour un amorti exceptionnel et un look agressif."
+                 data-images='["https://static.nike.com/a/images/w_1280,q_auto,f_auto/8f7678d4-a738-4899-a1a0-93ce8f220a62/date-de-sortie-de-la-air-max-tailwind%C2%A0v-x-skepta-%C2%AB%C2%A0chrome-blue%C2%A0%C2%BB.jpg", "https://static.nike.com/a/images/w_1280,q_auto,f_auto/f2085570-21ed-41b2-a20b-be08c4fdb185/date-de-sortie-de-la-air-max-tailwind%C2%A0v-x-skepta-%C2%AB%C2%A0chrome-blue%C2%A0%C2%BB.jpg", "https://static.nike.com/a/images/w_1280,q_auto,f_auto/75d5b5f1-0fb5-442f-91da-8d63e79e8af2/date-de-sortie-de-la-air-max-tailwind%C2%A0v-x-skepta-%C2%AB%C2%A0chrome-blue%C2%A0%C2%BB.jpg"]'
+                 data-sizes='["38", "39", "40", "41", "42", "43"]'>
+                <div class="product-image" style="background: none; padding: 0;" onclick="openProductModal(this.closest('.product-card'))">
                     <span class="badge" style="background-color: var(--primary);">Hot</span>
                     <div class="slider-container">
                         <div class="slide active"><img src="https://static.nike.com/a/images/w_1280,q_auto,f_auto/8f7678d4-a738-4899-a1a0-93ce8f220a62/date-de-sortie-de-la-air-max-tailwind%C2%A0v-x-skepta-%C2%AB%C2%A0chrome-blue%C2%A0%C2%BB.jpg" alt="1"></div>
                         <div class="slide"><img src="https://static.nike.com/a/images/w_1280,q_auto,f_auto/f2085570-21ed-41b2-a20b-be08c4fdb185/date-de-sortie-de-la-air-max-tailwind%C2%A0v-x-skepta-%C2%AB%C2%A0chrome-blue%C2%A0%C2%BB.jpg" alt="2"></div>
                         <div class="slide"><img src="https://static.nike.com/a/images/w_1280,q_auto,f_auto/75d5b5f1-0fb5-442f-91da-8d63e79e8af2/date-de-sortie-de-la-air-max-tailwind%C2%A0v-x-skepta-%C2%AB%C2%A0chrome-blue%C2%A0%C2%BB.jpg" alt="3"></div>
-                        <button class="slider-btn prev-btn" onclick="changeSlide(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button class="slider-btn next-btn" onclick="changeSlide(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                        <button class="slider-btn prev-btn" onclick="event.stopPropagation(); changeSlide(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="slider-btn next-btn" onclick="event.stopPropagation(); changeSlide(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
                 <div class="product-info">
                     <div>
                         <div class="product-category">Baskets & Sneakers</div>
-                        <div class="product-name">Nike Air Max Tailwind V x Skepta</div>
+                        <div class="product-name" onclick="openProductModal(this.closest('.product-card'))">Nike Air Max Tailwind V x Skepta</div>
                         <div class="size-selector">
                             <label class="size-label" for="shoeSizeSelect">Sélectionner une pointure :</label>
                             <select id="shoeSizeSelect" class="size-select-dropdown">
@@ -1848,9 +2138,16 @@
                 </div>
             </div>
 
-            <!-- PRODUIT 3 -->
-            <div class="product-card" data-category="baskets" data-name="Cloudrunner 3 Max" data-price="75.00" data-price-formatted="75,00 €" data-img="https://images.ctfassets.net/hnk2vsx53n6l/5gqdhB2rOPMNdB780rifAD/99418030dcb6324eb1e97cc2f006dcd2/deb096edb9072a63d0e19919197b5f2d6ec958d4.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80">
-                <div class="product-image" style="background: none; padding: 0;">
+            <!-- Cloudrunner 3 Max -->
+            <div class="product-card" 
+                 data-category="baskets" 
+                 data-name="Cloudrunner 3 Max" 
+                 data-price="75.00" 
+                 data-price-formatted="75,00 €" 
+                 data-desc="La Cloudrunner 3 Max redéfinit le confort et le soutien pour vos sessions de running ou un usage urbain intensif. Équipée de la technologie CloudTec amortissante et d'une semelle intermédiaire repensée, elle absorbe efficacement les impacts pour un déroulé de pied fluide."
+                 data-images='["https://images.ctfassets.net/hnk2vsx53n6l/5gqdhB2rOPMNdB780rifAD/99418030dcb6324eb1e97cc2f006dcd2/deb096edb9072a63d0e19919197b5f2d6ec958d4.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80", "https://images.ctfassets.net/hnk2vsx53n6l/42Zl8WDYkr4gKLdqBjivna/758bd4dd69c532fc12dfd3a16ec9f7b6/6406a52f26aefe965882adbcc7e3b15cad909327.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80", "https://images.ctfassets.net/hnk2vsx53n6l/HrOD6omii2Wixs6TRDSDJ/b5ff9fc7b3c312c6ac35b47afe1f5ce5/528f436867b5788f85bf12264499fc7d0f18c122.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80", "https://images.ctfassets.net/hnk2vsx53n6l/7F36F5UyOWVdlDEAPeTfY1/943e52b3896a8dec4ccadc8cf65711b0/c5210f1063dded445bd70c4428896730f1623da4.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80", "https://images.ctfassets.net/hnk2vsx53n6l/6tWdoMGQQssrUTRJnvqsbO/543562ddfdc9809587190be6157538fc/936dc5a5f3bdd8105e349bfdd6e77905ba340b42.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80"]'
+                 data-sizes='["37", "38", "39", "40", "41", "42", "43"]'>
+                <div class="product-image" style="background: none; padding: 0;" onclick="openProductModal(this.closest('.product-card'))">
                     <span class="badge">Nouveau</span>
                     <div class="slider-container">
                         <div class="slide active"><img src="https://images.ctfassets.net/hnk2vsx53n6l/5gqdhB2rOPMNdB780rifAD/99418030dcb6324eb1e97cc2f006dcd2/deb096edb9072a63d0e19919197b5f2d6ec958d4.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80" alt="White | Verdite"></div>
@@ -1858,14 +2155,14 @@
                         <div class="slide"><img src="https://images.ctfassets.net/hnk2vsx53n6l/HrOD6omii2Wixs6TRDSDJ/b5ff9fc7b3c312c6ac35b47afe1f5ce5/528f436867b5788f85bf12264499fc7d0f18c122.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80" alt="White | Glacier"></div>
                         <div class="slide"><img src="https://images.ctfassets.net/hnk2vsx53n6l/7F36F5UyOWVdlDEAPeTfY1/943e52b3896a8dec4ccadc8cf65711b0/c5210f1063dded445bd70c4428896730f1623da4.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80" alt="Ivory | Dijon"></div>
                         <div class="slide"><img src="https://images.ctfassets.net/hnk2vsx53n6l/6tWdoMGQQssrUTRJnvqsbO/543562ddfdc9809587190be6157538fc/936dc5a5f3bdd8105e349bfdd6e77905ba340b42.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80" alt="Frost | Rock"></div>
-                        <button class="slider-btn prev-btn" onclick="changeSlide(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button class="slider-btn next-btn" onclick="changeSlide(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                        <button class="slider-btn prev-btn" onclick="event.stopPropagation(); changeSlide(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="slider-btn next-btn" onclick="event.stopPropagation(); changeSlide(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
                 <div class="product-info">
                     <div>
                         <div class="product-category">Baskets & Sneakers</div>
-                        <div class="product-name">Cloudrunner 3 Max</div>
+                        <div class="product-name" onclick="openProductModal(this.closest('.product-card'))">Cloudrunner 3 Max</div>
                         
                         <div class="size-selector">
                             <label class="size-label">Pointure :</label>
@@ -1879,17 +2176,6 @@
                                 <option value="43">43</option>
                             </select>
                         </div>
-
-                        <div class="size-selector">
-                            <label class="size-label">Couleur :</label>
-                            <select class="size-select-dropdown product-color" onchange="changeColorImage(this)">
-                                <option value="0">White | Verdite</option>
-                                <option value="1">Black | Black</option>
-                                <option value="2">White | Glacier</option>
-                                <option value="3">Ivory | Dijon</option>
-                                <option value="4">Frost | Rock</option>
-                            </select>
-                        </div>
                     </div>
                     <div class="product-footer">
                         <span class="price">75,00 €</span>
@@ -1898,22 +2184,29 @@
                 </div>
             </div>
 
-            <!-- PRODUIT 4 -->
-            <div class="product-card" data-category="doudounes" data-name="Doudoune Capuche Sniper Noir" data-price="70.00" data-price-formatted="70,00 €" data-img="https://assets.laboutiqueofficielle.com/w_466,q_auto,f_auto/media/products/2025/09/03/none_476604_SNIPER_BLACK_20250908T084526_04.jpg">
-                <div class="product-image" style="background: none; padding: 0;">
+            <!-- Doudoune Capuche Sniper Noir -->
+            <div class="product-card" 
+                 data-category="doudounes" 
+                 data-name="Doudoune Capuche Sniper Noir" 
+                 data-price="70.00" 
+                 data-price-formatted="70,00 €" 
+                 data-desc="Affrontez le froid avec style grâce à la doudoune Sniper Noir. Dotée d'un garnissage thermique haute densité et d'une capuche enveloppante, elle offre une protection maximale contre le vent et les intempéries tout en conservant une coupe puffer tendance."
+                 data-images='["https://assets.laboutiqueofficielle.com/w_466,q_auto,f_auto/media/products/2025/09/03/none_476604_SNIPER_BLACK_20250908T084526_04.jpg", "https://assets.laboutiqueofficielle.com/w_466,q_auto,f_auto/media/products/2025/09/03/none_476604_SNIPER_BLACK_20250908T084523_02.jpg", "https://assets.laboutiqueofficielle.com/w_466,q_auto,f_auto/media/products/2025/09/03/none_476604_SNIPER_BLACK_20250908T084527_05.jpg"]'
+                 data-sizes='["XS", "S", "M", "L", "XL", "XXL"]'>
+                <div class="product-image" style="background: none; padding: 0;" onclick="openProductModal(this.closest('.product-card'))">
                     <span class="badge" style="background-color: var(--accent);">Populaire</span>
                     <div class="slider-container">
                         <div class="slide active"><img src="https://assets.laboutiqueofficielle.com/w_466,q_auto,f_auto/media/products/2025/09/03/none_476604_SNIPER_BLACK_20250908T084526_04.jpg" alt="1"></div>
                         <div class="slide"><img src="https://assets.laboutiqueofficielle.com/w_466,q_auto,f_auto/media/products/2025/09/03/none_476604_SNIPER_BLACK_20250908T084523_02.jpg" alt="2"></div>
                         <div class="slide"><img src="https://assets.laboutiqueofficielle.com/w_466,q_auto,f_auto/media/products/2025/09/03/none_476604_SNIPER_BLACK_20250908T084527_05.jpg" alt="3"></div>
-                        <button class="slider-btn prev-btn" onclick="changeSlide(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
-                        <button class="slider-btn next-btn" onclick="changeSlide(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                        <button class="slider-btn prev-btn" onclick="event.stopPropagation(); changeSlide(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="slider-btn next-btn" onclick="event.stopPropagation(); changeSlide(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
                 <div class="product-info">
                     <div>
                         <div class="product-category">Doudounes</div>
-                        <div class="product-name">Doudoune Capuche Sniper Noir</div>
+                        <div class="product-name" onclick="openProductModal(this.closest('.product-card'))">Doudoune Capuche Sniper Noir</div>
                         <div class="size-selector">
                             <span class="size-label">Sélectionner une taille :</span>
                             <div class="size-options">
@@ -1949,7 +2242,7 @@
                     <li onclick="filterCategory('baskets')">Baskets</li>
                     <li onclick="filterCategory('ensembles')">Ensembles</li>
                     <li onclick="filterCategory('t-shirts')">T-shirts</li>
-                    <li onclick="filterCategory('tous')">Nouveautés</li>
+                    <li onclick="filterCategory('tous')">Accueil</li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -1974,6 +2267,7 @@
     <script>
         let cart = [];
         let isRegisterMode = false;
+        let activeModalProduct = null;
 
         function toggleAuth() {
             document.getElementById('authOverlay').classList.toggle('open');
@@ -2047,6 +2341,93 @@
             }
         }
 
+        /* --- LOGIQUE POP-UP DÉTAIL PRODUIT --- */
+        function openProductModal(card) {
+            activeModalProduct = card;
+            const name = card.getAttribute('data-name');
+            const priceFormatted = card.getAttribute('data-price-formatted');
+            const category = card.querySelector('.product-category').innerText;
+            const description = card.getAttribute('data-desc');
+            const images = JSON.parse(card.getAttribute('data-images'));
+            const sizes = JSON.parse(card.getAttribute('data-sizes'));
+
+            document.getElementById('modalCategory').innerText = category;
+            document.getElementById('modalTitle').innerText = name;
+            document.getElementById('modalPrice').innerText = priceFormatted;
+            document.getElementById('modalDescription').innerText = description;
+
+            // Image principale
+            const mainImg = document.getElementById('modalMainImg');
+            mainImg.src = images[0];
+
+            // Miniatures
+            const thumbsContainer = document.getElementById('modalThumbsContainer');
+            thumbsContainer.innerHTML = '';
+            images.forEach((imgSrc, index) => {
+                thumbsContainer.innerHTML += `
+                    <div class="modal-thumb ${index === 0 ? 'active' : ''}" onclick="changeModalImage('${imgSrc}', this)">
+                        <img src="${imgSrc}" alt="Miniature ${index + 1}">
+                    </div>
+                `;
+            });
+
+            // Tailles
+            const sizeOptionsContainer = document.getElementById('modalSizeOptions');
+            sizeOptionsContainer.innerHTML = '';
+            sizes.forEach((size, index) => {
+                sizeOptionsContainer.innerHTML += `
+                    <button class="size-btn ${index === 0 ? 'selected' : ''}" onclick="selectModalSize(this, '${size}')">${size}</button>
+                `;
+            });
+
+            document.getElementById('productModalOverlay').classList.add('open');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModalOverlay').classList.remove('open');
+            activeModalProduct = null;
+        }
+
+        function changeModalImage(src, thumbEl) {
+            document.getElementById('modalMainImg').src = src;
+            document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+            thumbEl.classList.add('active');
+        }
+
+        /* --- FONCTIONS POUR LE PLEIN ÉCRAN DE LA PHOTO DU POP-UP --- */
+        function openFullscreenImage() {
+            const currentImgSrc = document.getElementById('modalMainImg').src;
+            if (!currentImgSrc) return;
+            document.getElementById('fullscreenImg').src = currentImgSrc;
+            document.getElementById('imageFullscreenOverlay').classList.add('open');
+        }
+
+        function closeFullscreenImage() {
+            document.getElementById('imageFullscreenOverlay').classList.remove('open');
+        }
+
+        function selectModalSize(btn, size) {
+            btn.closest('.size-options').querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+        }
+
+        function addModalToCart() {
+            if (!activeModalProduct) return;
+            const name = activeModalProduct.getAttribute('data-name');
+            const priceNum = parseFloat(activeModalProduct.getAttribute('data-price'));
+            const priceFormatted = activeModalProduct.getAttribute('data-price-formatted');
+            const imgSrc = document.getElementById('modalMainImg').src;
+            
+            const selectedBtn = document.querySelector('#modalSizeOptions .size-btn.selected');
+            const size = selectedBtn ? selectedBtn.innerText : 'Unique';
+
+            cart.push({ name, price: priceNum, priceFormatted, size, color: '', imgSrc });
+
+            updateCartUI();
+            closeProductModal();
+            toggleCart();
+        }
+
         function addToCart(button) {
             const card = button.closest('.product-card');
             const name = card.getAttribute('data-name');
@@ -2054,14 +2435,10 @@
             const priceFormatted = card.getAttribute('data-price-formatted');
             
             let imgSrc = card.getAttribute('data-img');
-            const imgIcon = card.getAttribute('data-img-icon');
-            
             let size = 'Unique';
-            let color = '';
 
             const sizeDropdown = card.querySelector('.product-size');
             const standardDropdown = card.querySelector('.size-select-dropdown');
-            const colorDropdown = card.querySelector('.product-color');
             const selectedSizeBtn = card.querySelector('.size-btn.selected');
 
             if (selectedSizeBtn) {
@@ -2077,11 +2454,7 @@
                 imgSrc = activeSlideImg.src;
             }
 
-            if (colorDropdown) {
-                color = colorDropdown.options[colorDropdown.selectedIndex].text;
-            }
-
-            cart.push({ name, price: priceNum, priceFormatted, size, color, imgSrc, imgIcon });
+            cart.push({ name, price: priceNum, priceFormatted, size, color: '', imgSrc });
 
             updateCartUI();
             toggleCart();
@@ -2113,8 +2486,6 @@
                 let imageHtml = '';
                 if (item.imgSrc) {
                     imageHtml = `<img src="${item.imgSrc}" alt="${item.name}">`;
-                } else if (item.imgIcon) {
-                    imageHtml = `<i class="${item.imgIcon}"></i>`;
                 } else {
                     imageHtml = `<i class="fa-solid fa-box"></i>`;
                 }
@@ -2163,20 +2534,6 @@
             slides[activeIndex].classList.remove('active');
             activeIndex = (activeIndex + direction + slides.length) % slides.length;
             slides[activeIndex].classList.add('active');
-        }
-
-        function changeColorImage(selectElement) {
-            const card = selectElement.closest('.product-card');
-            const slides = card.querySelectorAll('.slide');
-            const targetIndex = parseInt(selectElement.value);
-
-            slides.forEach((slide, index) => {
-                if (index === targetIndex) {
-                    slide.classList.add('active');
-                } else {
-                    slide.classList.remove('active');
-                }
-            });
         }
 
         function filterCategory(category) {
