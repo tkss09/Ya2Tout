@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ya 2 Tout | Tendance & Streetwear</title>
+    <title>SAPE & Shoes | Tendance & Streetwear</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -573,7 +573,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: zoom-in; /* Indique qu'on peut cliquer pour agrandir */
+            cursor: zoom-in;
         }
 
         .modal-main-img-container img {
@@ -1228,7 +1228,7 @@
 
         .cat-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 15px;
         }
 
@@ -1538,7 +1538,7 @@
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 1024px) {
             .cat-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
             .product-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1702,10 +1702,10 @@
             <div class="tracking-search-box" id="trackingSearchBox">
                 <p>Entrez votre numéro de commande ou numéro de suivi pour consulter l'état de votre livraison, l'expédition et les détails de paiement.</p>
                 <div class="tracking-input-group">
-                    <input type="text" id="orderNumberInput" placeholder="Ex: Y2T-84920 ou #CP93842109FR">
+                    <input type="text" id="orderNumberInput" placeholder="Ex: S&S-84920 ou #CP93842109FR">
                     <button class="track-btn" onclick="searchOrder()">Rechercher</button>
                 </div>
-                <span class="tracking-error-msg" id="trackingErrorMsg">Commande introuvable. Essayez par exemple : <b style="cursor: pointer; text-decoration: underline;" onclick="document.getElementById('orderNumberInput').value='Y2T-84920'; searchOrder();">Y2T-84920</b></span>
+                <span class="tracking-error-msg" id="trackingErrorMsg">Commande introuvable. Essayez par exemple : <b style="cursor: pointer; text-decoration: underline;" onclick="document.getElementById('orderNumberInput').value='S&S-84920'; searchOrder();">S&S-84920</b></span>
             </div>
 
             <div class="tracking-result-content" id="trackingResultContent">
@@ -1714,7 +1714,7 @@
                 <div class="tracking-info-grid">
                     <div class="tracking-info-item">
                         <span>N° de commande</span>
-                        <strong id="resOrderId">#Y2T-84920</strong>
+                        <strong id="resOrderId">#S&S-84920</strong>
                     </div>
                     <div class="tracking-info-item">
                         <span>Date de commande</span>
@@ -1871,7 +1871,7 @@
                 <form class="auth-form" onsubmit="event.preventDefault(); alert('Votre demande de retour/échange a été enregistrée. L\'étiquette prépayée vous a été envoyée par e-mail !'); toggleReturnsModal();">
                     <div class="form-group">
                         <label>Numéro de commande</label>
-                        <input type="text" placeholder="Ex: Y2T-84920" required>
+                        <input type="text" placeholder="Ex: S&S-84920" required>
                     </div>
                     <div class="form-group">
                         <label>Adresse e-mail associée</label>
@@ -1926,7 +1926,7 @@
                         </div>
                         <div class="social-text">
                             <h4>Snapchat</h4>
-                            <p>@ya2tout_shop</p>
+                            <p>@sapeandshoes_shop</p>
                         </div>
                     </div>
                     <span class="social-action-badge">Ajouter</span>
@@ -1960,9 +1960,10 @@
 
     <header>
         <div class="navbar">
-            <div class="logo" onclick="filterCategory('tous')">Ya 2 <span>Tout</span></div>
+            <div class="logo" onclick="filterCategory('tous')">SAPE & <span>Shoes</span></div>
             <ul class="nav-links">
                 <li onclick="filterCategory('tous')" class="active-nav" id="nav-tous">Accueil</li>
+                <li onclick="filterCategory('femme')" id="nav-femme">Femme</li>
                 <li onclick="filterCategory('t-shirts')" id="nav-t-shirts">T-shirts</li>
                 <li onclick="filterCategory('baskets')" id="nav-baskets">Baskets & Sneakers</li>
                 <li onclick="filterCategory('ensembles')" id="nav-ensembles">Ensembles</li>
@@ -1983,7 +1984,7 @@
         <div class="hero-banner">
             <span class="badge" style="position: relative; top: 0; left: 0; margin-bottom: 15px;">Nouvelle Collection</span>
             <h1>Définis ton style, impose ta tendance.</h1>
-            <p>Découvre notre sélection exclusive de doudounes oversize, ensembles streetwear et baskets incontournables sur Ya 2 Tout.</p>
+            <p>Découvre notre sélection exclusive de doudounes oversize, ensembles streetwear et baskets incontournables sur SAPE & Shoes.</p>
             <a href="#shop" class="btn">Explorer la collection</a>
         </div>
     </section>
@@ -1991,6 +1992,10 @@
     <section class="categories">
         <h2 class="section-title">Shop par Catégorie</h2>
         <div class="cat-grid">
+            <div class="cat-card" onclick="filterCategory('femme')">
+                <i class="fa-solid fa-person-dress"></i>
+                <h3>Femme</h3>
+            </div>
             <div class="cat-card" onclick="filterCategory('t-shirts')">
                 <i class="fa-solid fa-shirt"></i>
                 <h3>T-shirts</h3>
@@ -2014,6 +2019,58 @@
         <h2 class="section-title" id="shopTitle">Les Incontournables</h2>
         <div class="product-grid">
             
+            <!-- Pantalon Suit Up (Classique) - NOUVEAU PRODUIT FEMME -->
+            <div class="product-card" 
+                 data-category="femme" 
+                 data-name="Pantalon Suit Up (Classique)" 
+                 data-price="69.00" 
+                 data-price-formatted="69,00 €" 
+                 data-desc="Élégant et structuré, le pantalon Suit Up (Classique) offre une coupe impeccable taillée pour le vestiaire féminin. Confortable et polyvalent, il se marie facilement avec vos looks casual ou habillés."
+                 data-images='["https://www.aloyoga.com/cdn/shop/files/W54187R_03842_b1_s1_a2_m191_1024x1024.jpg?v=1773269696", "https://editorialist.com/web/2023/8/026/230/253/26230253~black_0.jpg"]'
+                 data-sizes='["XXS(32)", "XS(34-36)", "S(36-38)", "M(40-42)", "L(44-46)"]'
+                 data-colors='[{"name": "bleu", "img": "https://www.aloyoga.com/cdn/shop/files/W54187R_03842_b1_s1_a2_m191_1024x1024.jpg?v=1773269696"}, {"name": "black", "img": "https://editorialist.com/web/2023/8/026/230/253/26230253~black_0.jpg"}]'>
+                <div class="product-image" style="background: none; padding: 0;" onclick="openProductModal(this.closest('.product-card'))">
+                    <span class="badge" style="background-color: var(--accent);">Nouveau</span>
+                    <div class="slider-container">
+                        <div class="slide active"><img src="https://www.aloyoga.com/cdn/shop/files/W54187R_03842_b1_s1_a2_m191_1024x1024.jpg?v=1773269696" alt="bleu"></div>
+                        <div class="slide"><img src="https://editorialist.com/web/2023/8/026/230/253/26230253~black_0.jpg" alt="black"></div>
+                        <button class="slider-btn prev-btn" onclick="event.stopPropagation(); changeSlide(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button class="slider-btn next-btn" onclick="event.stopPropagation(); changeSlide(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div>
+                        <div class="product-category">Femme</div>
+                        <div class="product-name" onclick="openProductModal(this.closest('.product-card'))">Pantalon Suit Up (Classique)</div>
+                        
+                        <!-- Sélecteur de couleur -->
+                        <div class="size-selector" style="margin-bottom: 6px;">
+                            <span class="size-label">Couleur :</span>
+                            <select class="size-select-dropdown product-color" onchange="changeCardImageByColor(this)">
+                                <option value="bleu" selected>Bleu</option>
+                                <option value="black">Black</option>
+                            </select>
+                        </div>
+
+                        <!-- Sélecteur de taille -->
+                        <div class="size-selector">
+                            <span class="size-label">Taille :</span>
+                            <select class="size-select-dropdown product-size">
+                                <option value="XXS(32)">XXS (32)</option>
+                                <option value="XS(34-36)">XS (34-36)</option>
+                                <option value="S(36-38)" selected>S (36-38)</option>
+                                <option value="M(40-42)">M (40-42)</option>
+                                <option value="L(44-46)">L (44-46)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">69,00 €</span>
+                        <button class="add-btn" onclick="addToCart(this)"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
             <!-- T-shirt CP Company -->
             <div class="product-card" 
                  data-category="t-shirts" 
@@ -2232,12 +2289,13 @@
     <footer>
         <div class="footer-content">
             <div class="footer-col">
-                <div class="logo" style="color: white; margin-bottom: 15px;" onclick="filterCategory('tous')">Ya 2 <span>Tout</span></div>
+                <div class="logo" style="color: white; margin-bottom: 15px;" onclick="filterCategory('tous')">SAPE & <span>Shoes</span></div>
                 <p style="color: #a1a1aa; font-size: 0.85rem; max-width: 300px;">La référence du streetwear moderne et des tendances urbaines pour affirmer votre identité.</p>
             </div>
             <div class="footer-col">
                 <h4>Collections</h4>
                 <ul>
+                    <li onclick="filterCategory('femme')">Femme</li>
                     <li onclick="filterCategory('doudounes')">Doudounes</li>
                     <li onclick="filterCategory('baskets')">Baskets</li>
                     <li onclick="filterCategory('ensembles')">Ensembles</li>
@@ -2260,7 +2318,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Ya 2 Tout. Tous droits réservés.</p>
+            <p>&copy; 2026 SAPE & Shoes. Tous droits réservés.</p>
         </div>
     </footer>
 
@@ -2293,6 +2351,53 @@
             document.getElementById('contactOverlay').classList.toggle('open');
         }
 
+        function filterCategory(category) {
+            const cards = document.querySelectorAll('.product-card');
+            const shopTitle = document.getElementById('shopTitle');
+            const navLinks = document.querySelectorAll('.nav-links li');
+
+            navLinks.forEach(li => li.classList.remove('active-nav'));
+            const activeNav = document.getElementById(`nav-${category}`);
+            if(activeNav) activeNav.classList.add('active-nav');
+
+            if (category === 'tous') {
+                shopTitle.innerText = "Les Incontournables";
+            } else {
+                shopTitle.innerText = "Collection " + category.charAt(0).toUpperCase() + category.slice(1);
+            }
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'tous' || cardCat === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function changeCardImageByColor(colorSelect) {
+            const card = colorSelect.closest('.product-card');
+            const selectedColor = colorSelect.value;
+            const colorsData = JSON.parse(card.getAttribute('data-colors') || '[]');
+            
+            const colorObj = colorsData.find(c => c.name === selectedColor);
+            if (!colorObj) return;
+
+            const slides = card.querySelectorAll('.slide');
+            slides.forEach((slide, index) => {
+                const img = slide.querySelector('img');
+                if (index === 0) {
+                    img.src = colorObj.img;
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+        }
+
         function searchOrder() {
             const inputVal = document.getElementById('orderNumberInput').value.trim();
             const errorMsg = document.getElementById('trackingErrorMsg');
@@ -2300,7 +2405,7 @@
             const resultContent = document.getElementById('trackingResultContent');
             const modalTitle = document.getElementById('trackingModalTitle');
 
-            if (inputVal === "Y2T-84920" || inputVal === "#Y2T-84920" || inputVal === "CP93842109FR" || inputVal === "#CP93842109FR") {
+            if (inputVal === "S&S-84920" || inputVal === "#S&S-84920" || inputVal === "CP93842109FR" || inputVal === "#CP93842109FR") {
                 errorMsg.style.display = "none";
                 searchBox.style.display = "none";
                 resultContent.classList.add('active');
@@ -2356,11 +2461,9 @@
             document.getElementById('modalPrice').innerText = priceFormatted;
             document.getElementById('modalDescription').innerText = description;
 
-            // Image principale
             const mainImg = document.getElementById('modalMainImg');
             mainImg.src = images[0];
 
-            // Miniatures
             const thumbsContainer = document.getElementById('modalThumbsContainer');
             thumbsContainer.innerHTML = '';
             images.forEach((imgSrc, index) => {
@@ -2371,14 +2474,24 @@
                 `;
             });
 
-            // Tailles
             const sizeOptionsContainer = document.getElementById('modalSizeOptions');
             sizeOptionsContainer.innerHTML = '';
-            sizes.forEach((size, index) => {
-                sizeOptionsContainer.innerHTML += `
-                    <button class="size-btn ${index === 0 ? 'selected' : ''}" onclick="selectModalSize(this, '${size}')">${size}</button>
-                `;
-            });
+            
+            // Si c'est un produit avec menu déroulant de taille (ex: pantalon avec XXS, XS, etc.)
+            if (card.querySelector('.product-size') && card.querySelector('.product-size').tagName === 'SELECT') {
+                let selectHtml = `<select class="size-select-dropdown" id="modalSizeDropdown">`;
+                sizes.forEach(s => {
+                    selectHtml += `<option value="${s}">${s}</option>`;
+                });
+                selectHtml += `</select>`;
+                sizeOptionsContainer.innerHTML = selectHtml;
+            } else {
+                sizes.forEach((size, index) => {
+                    sizeOptionsContainer.innerHTML += `
+                        <button class="size-btn ${index === 0 ? 'selected' : ''}" onclick="selectModalSize(this, '${size}')">${size}</button>
+                    `;
+                });
+            }
 
             document.getElementById('productModalOverlay').classList.add('open');
         }
@@ -2394,7 +2507,6 @@
             thumbEl.classList.add('active');
         }
 
-        /* --- FONCTIONS POUR LE PLEIN ÉCRAN DE LA PHOTO DU POP-UP --- */
         function openFullscreenImage() {
             const currentImgSrc = document.getElementById('modalMainImg').src;
             if (!currentImgSrc) return;
@@ -2418,10 +2530,20 @@
             const priceFormatted = activeModalProduct.getAttribute('data-price-formatted');
             const imgSrc = document.getElementById('modalMainImg').src;
             
+            const dropdownSize = document.getElementById('modalSizeDropdown');
             const selectedBtn = document.querySelector('#modalSizeOptions .size-btn.selected');
-            const size = selectedBtn ? selectedBtn.innerText : 'Unique';
+            
+            let size = 'Unique';
+            if (dropdownSize) {
+                size = dropdownSize.value;
+            } else if (selectedBtn) {
+                size = selectedBtn.innerText;
+            }
 
-            cart.push({ name, price: priceNum, priceFormatted, size, color: '', imgSrc });
+            const colorSelect = activeModalProduct.querySelector('.product-color');
+            const color = colorSelect ? colorSelect.value : '';
+
+            cart.push({ name, price: priceNum, priceFormatted, size, color, imgSrc });
 
             updateCartUI();
             closeProductModal();
@@ -2434,27 +2556,27 @@
             const priceNum = parseFloat(card.getAttribute('data-price'));
             const priceFormatted = card.getAttribute('data-price-formatted');
             
-            let imgSrc = card.getAttribute('data-img');
             let size = 'Unique';
+            let color = '';
 
             const sizeDropdown = card.querySelector('.product-size');
-            const standardDropdown = card.querySelector('.size-select-dropdown');
+            const colorSelect = card.querySelector('.product-color');
             const selectedSizeBtn = card.querySelector('.size-btn.selected');
 
             if (selectedSizeBtn) {
                 size = selectedSizeBtn.innerText;
             } else if (sizeDropdown) {
                 size = sizeDropdown.value;
-            } else if (standardDropdown) {
-                size = standardDropdown.value;
+            }
+
+            if (colorSelect) {
+                color = colorSelect.value;
             }
 
             const activeSlideImg = card.querySelector('.slide.active img');
-            if (activeSlideImg) {
-                imgSrc = activeSlideImg.src;
-            }
+            let imgSrc = activeSlideImg ? activeSlideImg.src : '';
 
-            cart.push({ name, price: priceNum, priceFormatted, size, color: '', imgSrc });
+            cart.push({ name, price: priceNum, priceFormatted, size, color, imgSrc });
 
             updateCartUI();
             toggleCart();
@@ -2483,14 +2605,9 @@
             cart.forEach((item, index) => {
                 total += item.price;
                 
-                let imageHtml = '';
-                if (item.imgSrc) {
-                    imageHtml = `<img src="${item.imgSrc}" alt="${item.name}">`;
-                } else {
-                    imageHtml = `<i class="fa-solid fa-box"></i>`;
-                }
+                let imageHtml = item.imgSrc ? `<img src="${item.imgSrc}" alt="${item.name}">` : `<i class="fa-solid fa-box"></i>`;
 
-                let detailsText = `Taille / Pointure : ${item.size}`;
+                let detailsText = `Taille : ${item.size}`;
                 if (item.color) {
                     detailsText += ` | Couleur : ${item.color}`;
                 }
@@ -2535,46 +2652,6 @@
             activeIndex = (activeIndex + direction + slides.length) % slides.length;
             slides[activeIndex].classList.add('active');
         }
-
-        function filterCategory(category) {
-            const cards = document.querySelectorAll('.product-card');
-            const titleEl = document.getElementById('shopTitle');
-
-            document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active-nav'));
-            const activeNav = document.getElementById(`nav-${category}`);
-            if(activeNav) activeNav.classList.add('active-nav');
-
-            const titles = {
-                'tous': 'Les Incontournables',
-                't-shirts': 'T-shirts',
-                'baskets': 'Baskets & Sneakers',
-                'ensembles': 'Ensembles Street',
-                'doudounes': 'Doudounes & Puffer'
-            };
-            titleEl.innerText = titles[category] || 'Catalogue';
-
-            cards.forEach(card => {
-                const cardCategory = card.getAttribute('data-category');
-                if (category === 'tous' || cardCategory === category) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        setInterval(() => {
-            const bgSlides = document.querySelectorAll('.bg-slide');
-            if (bgSlides.length > 0) {
-                let activeBgIndex = Array.from(bgSlides).findIndex(slide => slide.classList.contains('active'));
-                bgSlides[activeBgIndex].classList.remove('active');
-                let nextBgIndex = (activeBgIndex + 1) % bgSlides.length;
-                bgSlides[nextBgIndex].classList.add('active');
-            }
-        }, 5000);
     </script>
-
 </body>
 </html>
