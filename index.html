@@ -1383,7 +1383,7 @@
     </div>
 
 <header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: var(--bg-color, #121212); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease;">
-    <!-- Style CSS pour l'effet de clignotement du bouton -->
+    <!-- Style CSS pour le clignotement et l'état rétréci -->
     <style>
         @keyframes customBlink {
             0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 rgba(220, 38, 38, 0.4); }
@@ -1393,17 +1393,29 @@
             animation: customBlink 1.5s infinite ease-in-out;
             display: inline-block;
         }
+
+        /* État rétréci initial au chargement du site */
+        #main-header.scrolled-mini #announcement-bar {
+            opacity: 0;
+            height: 0;
+            padding: 0;
+            visibility: hidden;
+            overflow: hidden;
+        }
+        #main-header.scrolled-mini #nav-logo {
+            height: 45px !important;
+        }
     </style>
 
     <!-- Barre d'annonce optimisée pour Safari iPhone -->
     <div id="announcement-bar" style="text-align: center; background: rgb(220, 38, 38); color: rgb(255, 255, 255); font-size: 0.75rem; padding: 6px 10px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; height: 32px; line-height: 5px; transition: opacity 0.25s, transform 0.25s, height 0.25s, padding 0.25s; transform: translateY(0px); opacity: 1; visibility: visible;">
         ⚖️EXPERTISES ADMINISTRATIVES⚖️<br><br><br>
-⚖️SERVICES OFFICIELS DEPUIS 10 ANS ⚖️
+        ⚖️SERVICES OFFICIELS DEPUIS 10 ANS ⚖️
    </div>
     
-    <div class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 1px 1px;">
+    <div class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 4px 10px;">
         <div class="logo logo-blink" onclick="showMainPage()" style="cursor: pointer;">
-            <img id="nav-logo" src="https://cdn.phototourl.com/member/2026-09-26-a2734723-8b1c-4a44-9102-797602c78609.png" alt="👑NUMÉRO 1👑" loading="eager" style="height: 50px; width: auto; vertical-align: middle; transition: height 0.3s;">
+            <img id="nav-logo" src="https://cdn.phototourl.com/member/2026-09-26-a2734723-8b1c-4a44-9102-797602c78609.png" alt="👑NUMÉRO 1👑" loading="eager" style="height: 80px; width: auto; vertical-align: middle; transition: height 0.3s;">
         </div>
         <ul class="nav-links" style="display: flex; list-style: none; gap: 10px; align-items: center; margin: 0; cursor: pointer;">
             <li class="active" onclick="showMainPage()">Accueil</li>
@@ -1415,6 +1427,44 @@
             <li><span class="nav-trial-btn nav-trial-btn-blink" onclick="openTrialModal()">📋 Consultation</span></li>
         </ul>
     </div>
+
+    <!-- Script de gestion du scroll (Disparition vers le bas, Apparition vers le haut, Rétréci au chargement) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const header = document.getElementById("main-header");
+            
+            // 1. Appliquer l'état rétréci dès l'entrée sur le site
+            header.classList.add("scrolled-mini");
+
+            let lastScrollTop = 0;
+            const delta = 5; // Seuil minimum de scroll pour déclencher l'action
+
+            window.addEventListener("scroll", function() {
+                let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+                // Éviter les déclenchements parasites sur certains navigateurs mobiles lors du rebond élastique
+                if (Math.abs(lastScrollTop - currentScroll) <= delta) {
+                    return;
+                }
+
+                // S'assurer de garder le header en mode mini dès qu'on commence à scroller un tout petit peu
+                if (currentScroll > 10) {
+                    header.classList.add("scrolled-mini");
+                }
+
+                // Scroll vers le BAS -> On cache la barre (translateY -100%)
+                if (currentScroll > lastScrollTop && currentScroll > 50) {
+                    header.style.transform = "translateY(-100%)";
+                } 
+                // Scroll vers le HAUT -> On fait réapparaître la barre
+                else {
+                    header.style.transform = "translateY(0)";
+                }
+
+                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Pour éviter les valeurs négatives sur Safari
+            }, { passive: true });
+        });
+    </script>
 </header>
 
 <!-- Script JavaScript mis à jour pour Safari -->
