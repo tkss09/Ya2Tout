@@ -1384,9 +1384,21 @@
         <button class="scroll-btn" onclick="scrollToBottom()" title="Aller tout en bas"><i class="fa-solid fa-arrow-down"></i></button>
     </div>
 
-<header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: var(--bg-color, #121212); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: all 0.3s ease;">
-    <!-- Barre d'annonce corrigée -->
-    <div id="announcement-bar" style="text-align: center; background: #dc2626; color: #fff; font-size: 0.8rem; padding: 8px 10px; font-weight: bold; transition: all 0.3s ease; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+<header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: var(--bg-color, #121212); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease;">
+    <!-- Style CSS pour l'effet de clignotement du bouton -->
+    <style>
+        @keyframes customBlink {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 rgba(220, 38, 38, 0.4); }
+            50% { opacity: 0.75; transform: scale(1.03); box-shadow: 0 0 15px rgba(220, 38, 38, 0.8); }
+        }
+        .nav-trial-btn-blink {
+            animation: customBlink 1.5s infinite ease-in-out;
+            display: inline-block;
+        }
+    </style>
+
+    <!-- Barre d'annonce optimisée pour Safari iPhone -->
+    <div id="announcement-bar" style="text-align: center; background: #dc2626; color: #fff; font-size: 0.75rem; padding: 6px 10px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; height: 32px; line-height: 20px; transition: opacity 0.25s ease, transform 0.25s ease, height 0.25s ease, padding 0.25s ease; transform: translateY(0); opacity: 1;">
         ⚖️ EXPERTISES ADMINISTRATIVES &amp; SERVICES OFFICIELS DEPUIS 10 ANS ⚖️
     </div>
     
@@ -1400,29 +1412,34 @@
             <li onclick="showMainPage(); document.getElementById('tutorial-section').scrollIntoView({behavior: 'smooth'})">Démarches</li>
             <li onclick="showMainPage(); document.getElementById('faq-section').scrollIntoView({behavior: 'smooth'})">FAQ</li>
             <li onclick="showMainPage(); document.getElementById('retours-section').scrollIntoView({behavior: 'smooth'})">Retours Clients</li>
-            <li><span class="nav-trial-btn" onclick="openTrialModal()">📋 Consultation</span></li>
+            <!-- Bouton Consultation clignotant -->
+            <li><span class="nav-trial-btn nav-trial-btn-blink" onclick="openTrialModal()">📋 Consultation</span></li>
         </ul>
     </div>
 </header>
 
-<!-- Script JavaScript mis à jour -->
+<!-- Script JavaScript mis à jour pour Safari -->
 <script>
     window.addEventListener('scroll', function() {
         const announcement = document.getElementById('announcement-bar');
         const logo = document.getElementById('nav-logo');
 
-        if (window.scrollY > 50) {
-            // Masque complètement la barre d'annonce sans couper le texte au milieu
+        if (window.scrollY > 40) {
+            // Rétracte et masque proprement la barre sans bug d'affichage sous iOS
             announcement.style.opacity = '0';
-            announcement.style.maxHeight = '0px';
-            announcement.style.padding = '0px';
-            logo.style.height = '50px'; // Logo réduit
+            announcement.style.transform = 'translateY(-100%)';
+            announcement.style.height = '0px';
+            announcement.style.padding = '0px 10px';
+            announcement.style.visibility = 'hidden';
+            logo.style.height = '50px';
         } else {
-            // Remet tout proprement à l'identique une fois en haut
+            // Restaure la barre d'annonce à l'identique une fois remonté en haut
             announcement.style.opacity = '1';
-            announcement.style.maxHeight = '40px';
-            announcement.style.padding = '8px 10px';
-            logo.style.height = '80px'; // Logo d'origine
+            announcement.style.transform = 'translateY(0)';
+            announcement.style.height = '32px';
+            announcement.style.padding = '6px 10px';
+            announcement.style.visibility = 'visible';
+            logo.style.height = '80px';
         }
     });
 </script>
