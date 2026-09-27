@@ -1862,11 +1862,18 @@
             </div>
         </div>
 
-        <!-- Exemple 2 : Preuve Vidéo -->
+<!-- Exemple 2 : Preuve Vidéo -->
         <div class="proof-card" onclick="openProofModal('video', 'https://videotourl.com/videos/1790519956857-c634ac22-7e49-4c4f-8335-70d62f9af345.mp4', 'Retour client en vidéo')" style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; cursor: pointer; transition: var(--transition); position: relative;">
             <div style="height: 220px; overflow: hidden; position: relative; background: #111; display: flex; align-items: center; justify-content: center;">
-                <!-- Miniature ou aperçu vidéo -->
-                <video src="https://videotourl.com/videos/1790519956857-c634ac22-7e49-4c4f-8335-70d62f9af345.mp4" style="width: 100%; height: 100%; object-fit: cover;" muted></video>
+                
+                <!-- MODIFICATIONS ICI : Ajout de preload="metadata", playsinline et muted -->
+                <video src="https://videotourl.com/videos/1790519956857-c634ac22-7e49-4c4f-8335-70d62f9af345.mp4" 
+                       style="width: 100%; height: 100%; object-fit: cover;" 
+                       muted 
+                       playsinline 
+                       preload="metadata">
+                </video>
+
                 <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;">
                     <div style="width: 50px; height: 50px; background: #dc2626; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem; box-shadow: 0 0 20px rgba(220,38,38,0.6);">
                         <i class="fa-solid fa-play"></i>
