@@ -1659,6 +1659,33 @@
 .permis-services-list .permis-card-separator { display:block !important; width:100% !important; height:40px !important; min-height:40px !important; flex:0 0 40px !important; background:transparent !important; pointer-events:none !important; }
 @media (max-width:700px) { .permis-services-list .permis-card-separator { height:30px !important; min-height:30px !important; flex-basis:30px !important; } }
 </style>
+
+<style id="category-detail-final-typography-navbar">
+/* Page dédiée : typographie légèrement augmentée pour toutes les catégories */
+.category-detail-active .category-detail-description { font-size: 1.08rem !important; line-height: 1.65 !important; }
+.category-detail-active .category-features-grid li { font-size: 0.98rem !important; line-height: 1.5 !important; }
+.category-detail-active .category-services-heading p { font-size: 0.98rem !important; line-height: 1.5 !important; }
+.category-detail-active .category-service-card h4 { font-size: 1.12rem !important; line-height: 1.24 !important; }
+.category-detail-active .category-service-card p { font-size: 0.90rem !important; line-height: 1.34 !important; }
+.category-detail-active .category-service-card .service-price { font-size: 1.12rem !important; }
+.category-detail-active .category-service-card .add-cart-btn { font-size: 0.92rem !important; }
+/* Sur la seconde page : aucune navbar, seul le bouton Retour à l'accueil reste visible */
+body.category-detail-active > header,
+body.category-detail-active #main-header,
+body.category-detail-active nav,
+body.category-detail-active .navbar,
+body.category-detail-active .site-navbar,
+body.category-detail-active .main-navbar { display: none !important; visibility: hidden !important; height: 0 !important; min-height: 0 !important; }
+body.category-detail-active #categoryDetailPageContainer { padding-top: 0 !important; margin-top: 24px !important; }
+body.category-detail-active #categoryBackButton { display: inline-flex !important; visibility: visible !important; }
+@media (max-width: 700px) {
+  .category-detail-active .category-detail-description { font-size: 1rem !important; }
+  .category-detail-active .category-features-grid li { font-size: 0.92rem !important; }
+  .category-detail-active .category-service-card h4 { font-size: 1.02rem !important; }
+  .category-detail-active .category-service-card p { font-size: 0.84rem !important; }
+  .category-detail-active .category-service-card .service-price { font-size: 1.08rem !important; }
+}
+</style>
 </head>
 <body>
 
@@ -2764,7 +2791,7 @@
                     },
                     { 
                         name: "Permis B (sans déplacement)", 
-                        price: "Sur devis<br><strong>(Sous Conditions)", 
+                        price: "Sur devis (Sous Conditions)", 
                         info: "<br><br>Accompagnement, constitution de dossier et démarches réglementaires pour l'obtention du Permis B sans déplacement aux examens physiques traditionnels.<br><br><strong>Tarif<br><strong>(Sous Conditions) :</strong> Sur Devis" 
                     },
                     { 
@@ -2785,7 +2812,7 @@
                     { 
                         name: "Assurance 1 mois provisoire tout véhicules", 
                         price: "Sur Devis", 
-                        info: "<br><br>Solution d'assurance temporaire rapide et adaptée pour tous types de véhicules.<br><br><strong>Informations à fournir :</strong><br>• Plaque : *********_<br>• Nom de la société (si c'est une société, sinon laisser vide) : *********_<br>• Nom : *********_<br>• Prénom : *********_<br>• Adresse : *********_<br>• Marque du véhicule : *********_<br>• Modèle du véhicule : *********_<br>• Année du véhicule : *********_<br>• Assurance authentique et enregistrée dans les fichiers de la police" 
+                        info: "Solution d'assurance temporaire rapide et adaptée pour tous types de véhicules.<br><strong>Informations à fournir :</strong><br>• Plaque : *********<br>• Nom de la société (si c'est une société, sinon laisser vide) : *********<br>• Nom : *********<br>• Prénom : *********<br>• Adresse : *********<br>• Marque du véhicule : *********<br>• Modèle du véhicule : *********<br>• Année du véhicule : *********<br>• Assurance authentique et enregistrée dans les fichiers de la police" 
                     },
                     { 
                         name: "Relevé d'assurance", 
@@ -2823,7 +2850,7 @@
                     { 
                         name: "Test Urinaire / Stupéfiant", 
                         price: "150€", 
-                        info: "<strong>Informations personnelles :</strong><br><br>• Nom : *********<br>• Prénom : *********<br>• Adresse : *******<br>• Date de naissance : *<br>• Lieu de naissance : *<br>• Téléphone (optionnel) : **<br>• N° Permis [neph] (optionnel) : ***<br><br><strong>Situation du permis de conduire :</strong><br>• Annulation ou suspension du permis : *****<br>• (Durée de la suspension) : **<br>• Motifs (perte de points, alcool ou stup) : *****<br>• Date du rdv commission médicale : *****" 
+                        info: "Informations personnelles : <br>• Nom : *********<br>• Prénom : *********<br>• Adresse : *******<br>• Date de naissance : *<br>• Lieu de naissance : *<br>• Téléphone (optionnel) : **<br>• N° Permis [neph] (optionnel) : ***<br><br><strong>Situation du permis de conduire :</strong>• Annulation ou suspension du permis : *****<br>• (Durée de la suspension) : **<br>• Motifs (perte de points, alcool ou stup) : *****<br>• Date du rdv commission médicale : *****" 
                     },
                     { name: "Test Psychotechnique", price: "150€", info: "Préparation et démarches pour vos tests psychotechniques." }
                 ]
@@ -3096,7 +3123,7 @@ function openCategoryServiceInfo(catId, serviceIdx) {
         }
 
         function showMainPage() {
-            document.getElementById('categoryDetailPageContainer').style.display = 'none';
+            document.body.classList.remove('category-detail-active'); document.getElementById('categoryDetailPageContainer').style.display = 'none';
             document.getElementById('mainPageContainer').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
