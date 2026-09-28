@@ -2048,6 +2048,168 @@ html, body {
     .client-proof-image-wrap { height: 330px !important; }
 }
 </style>
+
+<style id="main-page-premium-improvements">
+/* ===== AMÉLIORATIONS VISUELLES — PAGE PRINCIPALE UNIQUEMENT ===== */
+#mainPageContainer {
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,.045), transparent 32%),
+              linear-gradient(180deg, rgba(8,12,22,.18), rgba(8,12,22,0));
+}
+
+#mainPageContainer .hero {
+  position: relative;
+  isolation: isolate;
+}
+#mainPageContainer .hero::before {
+  content: "";
+  position: absolute;
+  inset: 8px 3% auto;
+  height: 190px;
+  border-radius: 40px;
+  background: radial-gradient(circle at 50% 50%, rgba(59,130,246,.14), transparent 68%);
+  filter: blur(12px);
+  z-index: -1;
+  pointer-events: none;
+}
+#mainPageContainer .hero-banner {
+  border: 1px solid rgba(255,255,255,.11) !important;
+  box-shadow: 0 18px 55px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.06) !important;
+  backdrop-filter: blur(7px);
+}
+#mainPageContainer .hero-content h1 {
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+#mainPageContainer .hero-content p {
+  max-width: 720px;
+  line-height: 1.65;
+}
+#mainPageContainer .hero-buttons {
+  gap: 12px !important;
+}
+#mainPageContainer .hero-buttons button {
+  min-height: 48px;
+  border-radius: 14px !important;
+  font-weight: 800;
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+#mainPageContainer .hero-buttons button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 10px 28px rgba(0,0,0,.22);
+}
+
+#mainPageContainer .trust-section {
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,.025);
+  box-shadow: 0 10px 35px rgba(0,0,0,.16);
+}
+#mainPageContainer .activation-badge {
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+#mainPageContainer .activation-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.18);
+}
+
+#mainPageContainer #catalog-section {
+  scroll-margin-top: 95px;
+}
+#mainPageContainer #catalog-section .section-header,
+#mainPageContainer .section-header {
+  position: relative;
+}
+#mainPageContainer #catalog-section .section-title,
+#mainPageContainer .section-title {
+  text-wrap: balance;
+  letter-spacing: -.015em;
+}
+#mainPageContainer #catalog-section .section-subtitle,
+#mainPageContainer .section-subtitle {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+#mainPageContainer #productGrid {
+  align-items: stretch;
+}
+#mainPageContainer #productGrid > * {
+  transition: transform .22s ease, filter .22s ease;
+}
+#mainPageContainer #productGrid > *:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.035);
+}
+
+#mainPageContainer .tutorial-section,
+#mainPageContainer .features-showcase,
+#mainPageContainer .reviews-section,
+#mainPageContainer .proof-section,
+#mainPageContainer #retours-section,
+#mainPageContainer .faq-section {
+  scroll-margin-top: 95px;
+}
+
+#mainPageContainer .tutorial-section,
+#mainPageContainer .features-showcase,
+#mainPageContainer .reviews-section,
+#mainPageContainer .proof-section,
+#mainPageContainer #retours-section,
+#mainPageContainer .faq-section {
+  position: relative;
+}
+#mainPageContainer .tutorial-section::before,
+#mainPageContainer .features-showcase::before,
+#mainPageContainer .reviews-section::before,
+#mainPageContainer .proof-section::before,
+#mainPageContainer #retours-section::before,
+#mainPageContainer .faq-section::before {
+  content: "";
+  position: absolute;
+  left: 8%; right: 8%; top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+  pointer-events: none;
+}
+
+#mainPageContainer .reviews-section,
+#mainPageContainer .proof-section,
+#mainPageContainer #retours-section {
+  border-radius: 24px;
+}
+
+#mainPageContainer .faq-section details {
+  transition: border-color .2s ease, transform .2s ease, background .2s ease;
+}
+#mainPageContainer .faq-section details:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.025);
+}
+
+/* Lisibilité mobile : on améliore uniquement la page d'accueil */
+@media (max-width: 700px) {
+  #mainPageContainer { padding-left: 10px !important; padding-right: 10px !important; }
+  #mainPageContainer .hero::before { inset: 5px 0 auto; height: 150px; }
+  #mainPageContainer .hero-banner { border-radius: 20px !important; }
+  #mainPageContainer .hero-content h1 { line-height: 1.12; }
+  #mainPageContainer .hero-content p { line-height: 1.5; }
+  #mainPageContainer .hero-buttons { width: 100%; }
+  #mainPageContainer .hero-buttons button { flex: 1 1 100%; width: 100%; min-height: 46px; }
+  #mainPageContainer .trust-section { border-radius: 16px; padding: 9px; }
+  #mainPageContainer #productGrid > *:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #mainPageContainer .hero-buttons button,
+  #mainPageContainer #productGrid > *,
+  #mainPageContainer .activation-badge,
+  #mainPageContainer .faq-section details { transition: none !important; }
+}
+</style>
 </head>
 <body>
 
@@ -4127,91 +4289,4 @@ function openCategoryServiceInfo(catId, serviceIdx) {
         // 4. Certificats & Justificatifs
         else if (["certificat", "hospitalisation", "travail", "arret", "arrêt", "justificatif", "medical", "médical", "maladie", "boulot"].some(kw => cleanText.includes(kw))) {
             setTimeout(() => {
-                const botReply = "On propose des documents officiels et certificats d'hospitalisation en toute confidentialité pour tes démarches ou ton travail. Contacte-nous pour voir les détails.";
-                addChatMessage(botReply, 'bot');
-            }, 800);
-        }
-        // 5. Au revoir
-        else if (["au revoir", "bye", "a+klin", "à plus", "tchao"].some(kw => cleanText.includes(kw))) {
-            setTimeout(() => {
-                const botReply = "À bientôt ! Passe une excellente journée et n'hésite pas à repasser si besoin.";
-                addChatMessage(botReply, 'bot');
-            }, 800);
-        }
-        // 6. Permis & Décennale
-        else if (["permis", "decenale", "points", "code", "annulation", "retrait", "conduite"].some(kw => cleanText.includes(kw))) {
-            setTimeout(() => {
-                const botReply = "Spécialiste depuis 10 ans dans l'accompagnement des dossiers de permis, annulation, code et tests psychotechniques. Nous vous offrons une assistance discrète et sécurisée.";
-                addChatMessage(botReply, 'bot');
-            }, 800);
-        }
-        // 7. Booking & Hôtels
-        else if (["booking", "hôtel", "hotel", "vacances", "partir", "billet", "reservation", "réservation", "reductions", "réduction", "-50", "moins cher"].some(kw => cleanText.includes(kw))) {
-            setTimeout(() => {
-                const botReply = "Tu veux voyager sans te ruiner ? On te propose jusqu'à -50% de réduction sur tes réservations d'hôtels Dis-nous ta destination sur Snapchat !";
-                addChatMessage(botReply, 'bot');
-            }, 800);
-        }
-        // 8. Contact & Humain
-        else if (["contact", "joindre", "parler", "humain", "personne", "telephone", "téléphone", "discuter", "aide", "sos", "admin", "createur", "soutenir", "repondre", "répondre", "bot", "robot"].some(kw => cleanText.includes(kw))) {
-            setTimeout(() => {
-                const botReply = "Le plus simple pour qu'on discute de ton cas le mieux c'est de nous écrire directement sur notre Snapchat officiel !";
-                addChatMessage(botReply, 'bot');
-            }, 800);
-        }
-        // 9. Aide & Tutoriel
-        else if (["aide", "comment", "fonctionne", "tutoriel", "guide"].some(kw => cleanText.includes(kw))) {
-            setTimeout(() => {
-                const botReply = "Je suis là pour vous guider ! Dites-moi ce que vous cherchez (par exemple : les tarifs, les horaires ou la création de dossier) et je vous orienterai.";
-                addChatMessage(botReply, 'bot');
-            }, 800);
-        }
-        // 10. Snapchat
-        else if (["snap", "snapchat"].some(kw => cleanText.includes(kw))) {
-            setTimeout(() => {
-                const botReply = "Voici mon snapchat @ JACKDA10";
-                addChatMessage(botReply, 'bot');
-            }, 800);
-        }
-        // 11. Fiabilité & Confiance
-        else if (["sûr", "fiable", "arnaque", "confiance", "sérieux", "vrai", "légitime", "legit", "escroc", "fake", "sur", "c'est sur", "c'est une arnaque"].some(kw => cleanText.includes(kw))) {
-            setTimeout(() => {
-                const botReply = "Tu peux avoir total confiance : on a des années d'expérience et des milliers de clients satisfaits. Viens échanger avec nous en direct, on te prouvera notre sérieux !";
-                addChatMessage(botReply, 'bot');
-            }, 800);
-        }
-        // 12. Sixt
-        else if (["sixt", "agence", "caution", "depot de garantie", "prix", "cher", "louer", "voiture", "reservation", "annulation", "frais", "carte bancaire"].some(kw => cleanText.includes(kw))) {
-            setTimeout(() => {
-                const botReply = "Profitez de -50% sur votre location chez Sixt ! Avec un large choix de véhicules récents, la liberté de voyager et un confort optimal sur la route, partez l'esprit tranquille. Réservez vite pour en profiter !";
-                addChatMessage(botReply, 'bot');
-            }, 800);
-        }
-        // 13. Tarifs & Prix
-        else if (["tarif", "prix", "combien", "coout", "coût", "coute", "coûte", "devis", "c'est combien", "payer", "paiement", "euro", "euros", "€", "c'est cher", "gratuit", "argent", "facture"].some(kw => cleanText.includes(kw))) {
-            setTimeout(() => {
-                const botReply = "Nos tarifs sont super accessibles (amendes dès 10€, devis sur mesure pour le reste). C'est rapide, discret et efficace. Viens voir avec nous sur Snapchat pour chiffrer ton besoin !";
-                addChatMessage(botReply, 'bot');
-            }, 800);
-        }
-        // Réponse par défaut
-        else {
-            setTimeout(() => {
-                const botReply = "Pour traiter votre demande personnalisée rapidement et en toute confidentialité, contactez-moi directement sur Snapchat ! 📲";
-                addChatMessage(botReply, 'bot');
-            }, 800);
-        }
-    }
-
-    function addChatMessage(text, sender) {
-        const container = document.getElementById('chatbotMessages');
-        const msgDiv = document.createElement('div');
-        msgDiv.className = `chatbot-msg ${sender}`;
-        msgDiv.innerText = text;
-        container.appendChild(msgDiv);
-        container.scrollTop = container.scrollHeight;
-    }
-</script>
-
-
-</body></html>
+                const botReply = "On propose des documents off
