@@ -1897,6 +1897,23 @@ html, body {
     }
 }
 
+/* Petit espace entre toutes les cartes de services sur smartphone, comme Permis, Route & Véhicules */
+@media (max-width: 700px) {
+    .category-services-list:not(.permis-services-list) {
+        gap: 14px !important;
+        row-gap: 14px !important;
+    }
+    .permis-services-list {
+        gap: 0 !important;
+        row-gap: 0 !important;
+    }
+    .permis-services-list .permis-card-separator {
+        height: 14px !important;
+        min-height: 14px !important;
+        flex-basis: 14px !important;
+    }
+}
+
 @media (max-width: 420px) {
     #mainPageContainer,
     #categoryDetailPageContainer {
