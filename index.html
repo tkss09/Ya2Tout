@@ -1,3 +1,4 @@
+
 <html lang="fr"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -1361,14 +1362,30 @@
                 font-size: 0.9rem;
             }
         }
-    </style>
+    
+        /* Ajustement spécifique des écritures des cartes de la page dédiée
+           pour Permis, Route & Véhicules et Tests Médicaux & Analyses. */
+        @media (max-width: 700px) {
+            .compact-service-card {
+                padding: 12px 16px !important;
+            }
+            .compact-service-card h4 {
+                font-size: 0.82rem !important;
+                margin-bottom: 8px !important;
+            }
+            .compact-service-card p {
+                font-size: 0.62rem !important;
+                line-height: 1.22 !important;
+            }
+        }
+</style>
 </head>
 <body>
 
     <div class="bg-slideshow" id="bgSlideshow">
-        <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&amp;auto=format&amp;fit=crop&amp;q=80');"></div>
+        <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600&amp;auto=format&amp;fit=crop&amp;q=80');"></div>
         <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=1600&amp;auto=format&amp;fit=crop&amp;q=80');"></div>
-        <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?w=1600&amp;auto=format&amp;fit=crop&amp;q=80');"></div>
+        <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?w=1600&amp;auto=format&amp;fit=crop&amp;q=80');"></div>
         <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1600&amp;auto=format&amp;fit=crop&amp;q=80');"></div>
     </div>
 
@@ -1382,8 +1399,8 @@
         <button class="scroll-btn" onclick="scrollToBottom()" title="Aller tout en bas"><i class="fa-solid fa-arrow-down"></i></button>
     </div>
 
-<header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background-color: var(--bg-color, #121212); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease;">
-    <!-- Style CSS pour le clignotement et l'état rétréci -->
+<header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; max-width: 100vw; box-sizing: border-box; z-index: 1000; background-color: var(--bg-color, #121212); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease; contain: layout paint;">
+    <!-- Style CSS pour l'effet de clignotement du bouton -->
     <style>
         @keyframes customBlink {
             0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 rgba(220, 38, 38, 0.4); }
@@ -1393,78 +1410,28 @@
             animation: customBlink 1.5s infinite ease-in-out;
             display: inline-block;
         }
-
-        /* État rétréci initial au chargement du site */
-        #main-header.scrolled-mini #announcement-bar {
-            opacity: 0;
-            height: 0;
-            padding: 0;
-            visibility: hidden;
-            overflow: hidden;
-        }
-        #main-header.scrolled-mini #nav-logo {
-            height: 45px !important;
-        }
     </style>
 
     <!-- Barre d'annonce optimisée pour Safari iPhone -->
     <div id="announcement-bar" style="text-align: center; background: rgb(220, 38, 38); color: rgb(255, 255, 255); font-size: 0.75rem; padding: 6px 10px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; height: 32px; line-height: 5px; transition: opacity 0.25s, transform 0.25s, height 0.25s, padding 0.25s; transform: translateY(0px); opacity: 1; visibility: visible;">
         ⚖️EXPERTISES ADMINISTRATIVES⚖️<br><br><br>
-        ⚖️SERVICES OFFICIELS DEPUIS 10 ANS ⚖️
+⚖️SERVICES OFFICIELS DEPUIS 10 ANS ⚖️
    </div>
     
-    <div class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 4px 10px;">
+    <div class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 5px 5px;">
         <div class="logo logo-blink" onclick="showMainPage()" style="cursor: pointer;">
             <img id="nav-logo" src="https://cdn.phototourl.com/member/2026-09-26-a2734723-8b1c-4a44-9102-797602c78609.png" alt="👑NUMÉRO 1👑" loading="eager" style="height: 80px; width: auto; vertical-align: middle; transition: height 0.3s;">
         </div>
-        <ul class="nav-links" style="display: flex; list-style: none; gap: 10px; align-items: center; margin: 0; cursor: pointer;">
+        <ul class="nav-links" style="display: flex; list-style: none; gap: 20px; align-items: center; margin: 0; cursor: pointer;">
             <li class="active" onclick="showMainPage()">Accueil</li>
-            <li onclick="showMainPage(); document.getElementById('catalog-section').scrollIntoView({behavior: 'smooth'})">Services</li>
-            <li onclick="showMainPage(); document.getElementById('tutorial-section').scrollIntoView({behavior: 'smooth'})">Démarches</li>
-            <li onclick="showMainPage(); document.getElementById('faq-section').scrollIntoView({behavior: 'smooth'})">FAQ</li>
-            <li onclick="showMainPage(); document.getElementById('retours-section').scrollIntoView({behavior: 'smooth'})">Retours Clients</li>
+            <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('catalog-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">Services</li>
+            <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('tutorial-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">Démarches</li>
+            <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('faq-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">FAQ</li>
+            <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('retours-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">Retours Clients</li>
             <!-- Bouton Consultation clignotant -->
             <li><span class="nav-trial-btn nav-trial-btn-blink" onclick="openTrialModal()">📋 Consultation</span></li>
         </ul>
     </div>
-
-    <!-- Script de gestion du scroll (Disparition vers le bas, Apparition vers le haut, Rétréci au chargement) -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const header = document.getElementById("main-header");
-            
-            // 1. Appliquer l'état rétréci dès l'entrée sur le site
-            header.classList.add("scrolled-mini");
-
-            let lastScrollTop = 0;
-            const delta = 5; // Seuil minimum de scroll pour déclencher l'action
-
-            window.addEventListener("scroll", function() {
-                let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-                // Éviter les déclenchements parasites sur certains navigateurs mobiles lors du rebond élastique
-                if (Math.abs(lastScrollTop - currentScroll) <= delta) {
-                    return;
-                }
-
-                // S'assurer de garder le header en mode mini dès qu'on commence à scroller un tout petit peu
-                if (currentScroll > 10) {
-                    header.classList.add("scrolled-mini");
-                }
-
-                // Scroll vers le BAS -> On cache la barre (translateY -100%)
-                if (currentScroll > lastScrollTop && currentScroll > 50) {
-                    header.style.transform = "translateY(-100%)";
-                } 
-                // Scroll vers le HAUT -> On fait réapparaître la barre
-                else {
-                    header.style.transform = "translateY(0)";
-                }
-
-                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Pour éviter les valeurs négatives sur Safari
-            }, { passive: true });
-        });
-    </script>
 </header>
 
 <!-- Script JavaScript mis à jour pour Safari -->
@@ -1563,7 +1530,7 @@
     </div>
 
     <!-- CONTENEUR PAGE PRINCIPALE -->
-    <div id="mainPageContainer">
+    <div id="mainPageContainer" style="padding-top: 125px; scroll-padding-top: 125px;">
         <section class="hero">
             <div class="hero-banner">
                 <div class="hero-content">
@@ -2319,7 +2286,7 @@
     </div>
 
     <!-- CONTENEUR PAGE DE CATEGORIE DÉDIÉE -->
-    <div id="categoryDetailPageContainer" style="display: none; max-width: 1300px; margin: 40px auto; padding: 0 15px;">
+    <div id="categoryDetailPageContainer" style="display: none; max-width: 1300px; margin: 40px auto; padding: 125px 15px 0; scroll-padding-top: 125px; box-sizing: border-box;">
         <button class="btn-secondary" onclick="showMainPage()" style="margin-bottom: 25px; display: inline-flex; align-items: center; gap: 8px; width: auto; min-width: unset;">
             <i class="fa-solid fa-arrow-left"></i> Retour à l'accueil
         </button>
@@ -2743,13 +2710,13 @@ function openCategoryPage(catId) {
             cat.services.forEach((srv, idx) => {
                 if (idx === 0) return; // Ignore le placeholder "Sélectionner un service"
                 servicesListHtml += `
-                    <div class="product-card" style="padding: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;" onclick="openCategoryServiceInfo('${cat.id}', ${idx})">
-                        <div style="flex: 1; min-width: 250px;">
-                            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: #fff;">${srv.name}</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; word-break: break-word;">${srv.info}</p>
+                    <div class="product-card category-service-card ${cat.id === 'medical' || cat.id === 'permis' ? 'compact-service-card' : ''}" style="width: 1269.98px; height: 294.84px; max-width: 100%; box-sizing: border-box; margin: 0 auto 15px; padding: ${cat.id === 'medical' || cat.id === 'permis' ? '14px 26px' : '20px 30px'}; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0; border: 1px solid #dc2626; border-radius: 20px; overflow: hidden;" onclick="openCategoryServiceInfo('${cat.id}', ${idx})">
+                        <div style="width: 100%; max-width: 100%; margin: 0 auto;">
+                            <h4 style="font-size: ${cat.id === 'medical' || cat.id === 'permis' ? '0.92rem' : '1.05rem'}; font-weight: 700; margin: 0 0 ${cat.id === 'medical' || cat.id === 'permis' ? '12px' : '20px'}; color: #fff; text-align: center; line-height: 1.25; overflow-wrap: anywhere;">${srv.name}</h4>
+                            <p style="font-size: ${cat.id === 'medical' || cat.id === 'permis' ? '0.68rem' : '0.85rem'}; color: var(--text-muted); line-height: ${cat.id === 'medical' || cat.id === 'permis' ? '1.28' : '1.5'}; word-break: break-word; overflow-wrap: anywhere; margin: 0 auto ${cat.id === 'medical' || cat.id === 'permis' ? '10px' : '18px'}; text-align: center;">${srv.info}</p>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <span style="font-size: 1.15rem; font-weight: 800; color: #ef4444; white-space: nowrap;">${srv.price}</span>
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; width: 100%;">
+                            <span style="font-size: ${cat.id === 'medical' || cat.id === 'permis' ? '1rem' : '1.15rem'}; font-weight: 800; color: #ef4444; white-space: nowrap;">${srv.price}</span>
                             <button class="add-cart-btn" onclick="event.stopPropagation(); openOrderPopupDirect('${cat.id}', ${idx})">Commander</button>
                         </div>
                     </div>
@@ -3466,7 +3433,6 @@ function openCategoryPage(catId) {
         container.scrollTop = container.scrollHeight;
     }
 </script>
-
 
 
 </body></html>
