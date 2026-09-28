@@ -2266,6 +2266,177 @@ html, body {
     #catalog-section #productGrid .product-card::before { transition: none; }
 }
 </style>
+
+<style id="homepage-final-polish-only">
+/* =========================================================
+   AMÉLIORATION VISUELLE PAGE PRINCIPALE UNIQUEMENT
+   La page dédiée n'est volontairement pas ciblée.
+   ========================================================= */
+
+/* Hero : hiérarchie plus nette et présence plus premium */
+#mainPageContainer .hero-banner {
+    border-color: rgba(255,255,255,.11) !important;
+    box-shadow: 0 28px 70px rgba(0,0,0,.52), 0 0 0 1px rgba(220,38,38,.035) inset !important;
+}
+#mainPageContainer .hero-content h1 {
+    text-wrap: balance;
+}
+#mainPageContainer .hero-content h1 span {
+    text-shadow: 0 0 18px rgba(220,38,38,.18);
+}
+#mainPageContainer .hero-buttons .btn-primary,
+#mainPageContainer .hero-buttons .btn-secondary {
+    min-height: 48px;
+}
+#mainPageContainer .hero-buttons .btn-primary:focus-visible,
+#mainPageContainer .hero-buttons .btn-secondary:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+/* Têtes de sections plus lisibles */
+#mainPageContainer .section-header {
+    position: relative;
+}
+#mainPageContainer .section-title {
+    position: relative;
+    padding-left: 13px;
+}
+#mainPageContainer .section-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .15em;
+    bottom: .15em;
+    width: 3px;
+    border-radius: 4px;
+    background: #dc2626;
+    box-shadow: 0 0 10px rgba(220,38,38,.45);
+}
+
+/* Catégories : impression de carte réellement interactive */
+#mainPageContainer #productGrid .product-card {
+    isolation: isolate;
+    will-change: transform;
+    outline: none;
+}
+#mainPageContainer #productGrid .product-card::after {
+    opacity: .72;
+    transition: opacity .3s ease, filter .3s ease;
+}
+#mainPageContainer #productGrid .product-card:hover::after,
+#mainPageContainer #productGrid .product-card:focus-visible::after {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(220,38,38,.16));
+}
+#mainPageContainer #productGrid .product-card:focus-visible {
+    outline: 2px solid rgba(239,68,68,.9);
+    outline-offset: 3px;
+}
+#mainPageContainer #productGrid .product-card:active {
+    transform: translateY(-1px) scale(.995);
+}
+
+/* Indicateur placé SUR LA PETITE PHOTO, en bas à droite */
+#mainPageContainer #catalog-section #productGrid .product-card::before {
+    top: auto !important;
+    right: 10px !important;
+    bottom: calc(100% - 180px + 10px) !important;
+    left: auto !important;
+    transform: none !important;
+    z-index: 20 !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,.28);
+}
+#mainPageContainer #catalog-section #productGrid .product-card:hover::before {
+    transform: translateY(-2px) scale(1.025) !important;
+}
+@media (max-width: 700px) {
+    #mainPageContainer #catalog-section #productGrid .product-card::before {
+        top: auto !important;
+        right: 8px !important;
+        bottom: calc(100% - 180px + 9px) !important;
+        left: auto !important;
+        font-size: .58rem !important;
+        padding: 6px 9px !important;
+    }
+}
+
+/* Photo de catégorie : léger zoom seulement au survol */
+#mainPageContainer #productGrid .product-image-container {
+    position: relative;
+}
+#mainPageContainer #productGrid .product-image-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.20) 100%);
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity .3s ease;
+}
+#mainPageContainer #productGrid .product-card:hover .product-image-container::before {
+    opacity: .82;
+}
+
+/* Recherche : meilleure sensation de contrôle */
+#mainPageContainer .search-bar-container:focus-within {
+    box-shadow: 0 0 0 4px rgba(220,38,38,.08), 0 12px 35px rgba(0,0,0,.25);
+}
+
+/* Cartes de confiance / avantages */
+#mainPageContainer .activation-badge,
+#mainPageContainer .compatibility-card,
+#mainPageContainer .showcase-card {
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+#mainPageContainer .activation-badge:hover,
+#mainPageContainer .compatibility-card:hover,
+#mainPageContainer .showcase-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(220,38,38,.28);
+    box-shadow: 0 14px 35px rgba(0,0,0,.20);
+}
+
+/* Avis : carte plus vivante sans animation permanente */
+#mainPageContainer .review-card {
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+#mainPageContainer .review-card:hover {
+    box-shadow: 0 14px 30px rgba(0,0,0,.22);
+}
+
+/* Respect du réglage de réduction des animations */
+@media (prefers-reduced-motion: reduce) {
+    #mainPageContainer .activation-badge,
+    #mainPageContainer .compatibility-card,
+    #mainPageContainer .showcase-card,
+    #mainPageContainer .review-card {
+        transition: none !important;
+    }
+}
+
+/* Smartphone : garder une page aérée et des zones tactiles confortables */
+@media (max-width: 700px) {
+    #mainPageContainer .section-header {
+        margin-bottom: 18px;
+    }
+    #mainPageContainer .section-title {
+        padding-left: 11px;
+    }
+    #mainPageContainer .product-grid {
+        gap: 14px;
+    }
+    #mainPageContainer .product-content {
+        padding: 16px;
+    }
+    #mainPageContainer .product-title {
+        font-size: 1.05rem;
+    }
+    #mainPageContainer .product-desc {
+        font-size: .82rem;
+    }
+}
+</style>
 </head>
 <body>
 
@@ -4072,6 +4243,71 @@ function openCategoryServiceInfo(catId, serviceIdx) {
         font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
+
+    /* Bulle de pensée d'accueil du chatbot */
+    #chatbot-greeting-bubble {
+        position: absolute;
+        left: 8px;
+        bottom: 72px;
+        width: max-content;
+        max-width: 245px;
+        padding: 11px 15px;
+        background: #fff;
+        color: #17171c;
+        border: 2px solid #dc2626;
+        border-radius: 18px;
+        font-size: .82rem;
+        font-weight: 800;
+        line-height: 1.25;
+        box-shadow: 0 8px 22px rgba(0,0,0,.25);
+        z-index: 10000;
+        animation: chatbotThoughtFloat 1.8s ease-in-out infinite;
+        transform-origin: bottom left;
+        transition: opacity .35s ease, transform .35s ease, visibility .35s ease;
+    }
+    #chatbot-greeting-bubble::after {
+        content: '';
+        position: absolute;
+        left: 18px;
+        bottom: -9px;
+        width: 15px;
+        height: 15px;
+        background: #fff;
+        border-right: 2px solid #dc2626;
+        border-bottom: 2px solid #dc2626;
+        transform: rotate(45deg);
+    }
+    #chatbot-greeting-bubble::before {
+        content: '';
+        position: absolute;
+        left: 5px;
+        bottom: -18px;
+        width: 7px;
+        height: 7px;
+        background: #fff;
+        border: 2px solid #dc2626;
+        border-radius: 50%;
+    }
+    #chatbot-greeting-bubble.hidden {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px) scale(.92);
+        animation: none;
+    }
+    @keyframes chatbotThoughtFloat {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-4px) scale(1.02); }
+    }
+    @media (max-width: 700px) {
+        #chatbot-greeting-bubble {
+            left: 2px;
+            bottom: 69px;
+            max-width: 210px;
+            padding: 10px 13px;
+            font-size: .76rem;
+        }
+    }
+
     /* Bouton flottant pour ouvrir/fermer le chatbot */
     #chatbot-button {
         width: 60px;
@@ -4270,7 +4506,8 @@ function openCategoryServiceInfo(catId, serviceIdx) {
 
 <!-- Structure HTML du Chatbot -->
 <div id="chatbot-widget">
-    <button id="chatbot-button" onclick="toggleChatbot()" title="Besoin d'aide ?">
+    <div id="chatbot-greeting-bubble" role="status">Bonjour 👋<br>Ta besoin d'aide ?</div>
+    <button id="chatbot-button" onclick="hideChatbotGreeting(); toggleChatbot()" title="Besoin d'aide ?">
         <i class="fa-solid fa-comments"></i>
     </button>
 
@@ -4301,6 +4538,17 @@ function openCategoryServiceInfo(catId, serviceIdx) {
 
 <!-- Script JS du Chatbot -->
 <script>
+
+    function hideChatbotGreeting() {
+        const bubble = document.getElementById('chatbot-greeting-bubble');
+        if (bubble) bubble.classList.add('hidden');
+    }
+
+    // La bulle d'accueil disparaît dès que l'utilisateur commence à faire défiler la page.
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 20) hideChatbotGreeting();
+    }, { passive: true });
+
     function toggleChatbot() {
         const win = document.getElementById('chatbot-window');
         win.classList.toggle('open');
