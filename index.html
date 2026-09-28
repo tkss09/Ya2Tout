@@ -3032,6 +3032,9 @@ function openCategoryPage(catId) {
                         </div>
                         <div class="service-card-action" onclick="event.stopPropagation()">
                             <span class="service-price">${srv.price}</span>
+                            <button class="info-btn info-btn-attention" onclick="event.stopPropagation(); openCategoryServiceInfo('${cat.id}', ${idx})">
+                                <i class="fa-solid fa-circle-info"></i> Info <span class="info-arrow-animated">➔</span>
+                            </button>
                             <button class="add-cart-btn" onclick="event.stopPropagation(); openOrderPopupDirect('${cat.id}', ${idx})">
                                 <i class="fa-solid fa-cart-shopping"></i> Commander
                             </button>
