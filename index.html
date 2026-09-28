@@ -1378,6 +1378,140 @@
                 line-height: 1.22 !important;
             }
         }
+
+        /* =========================================================
+           OPTIMISATION GLOBALE — iOS / iPadOS / Android / Windows
+           ========================================================= */
+        html {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: auto;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            min-width: 0;
+            touch-action: pan-y;
+        }
+
+        button, a, input, select, textarea {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        img, video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #categoryDetailPageContainer {
+            width: min(1300px, calc(100% - 30px));
+            max-width: 1300px;
+            box-sizing: border-box;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 0;
+            padding-right: 0;
+            scroll-margin-top: var(--navbar-safe-space, 118px);
+        }
+
+        /* Bouton retour : toujours visible, lisible et facile à toucher */
+        .category-back-btn {
+            position: relative;
+            z-index: 5;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-width: 190px !important;
+            min-height: 46px;
+            margin: 0 0 24px 0 !important;
+            padding: 11px 18px !important;
+            box-sizing: border-box;
+            border-radius: 12px !important;
+            white-space: nowrap;
+            line-height: 1.2;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .category-back-btn i {
+            flex: 0 0 auto;
+            font-size: 0.9rem;
+        }
+
+        .category-back-btn span {
+            display: inline-block;
+            overflow: visible;
+            text-overflow: clip;
+        }
+
+        /* Écrans intermédiaires */
+        @media (max-width: 1100px) {
+            #categoryDetailPageContainer {
+                width: min(100% - 24px, 1000px);
+            }
+        }
+
+        /* Tablettes / grands téléphones */
+        @media (max-width: 768px) {
+            #categoryDetailPageContainer {
+                width: calc(100% - 20px);
+                margin-top: 28px !important;
+                padding: 0 !important;
+            }
+
+            .category-back-btn {
+                min-width: 0 !important;
+                width: auto !important;
+                min-height: 44px;
+                padding: 10px 15px !important;
+                font-size: 0.82rem;
+                margin-bottom: 18px !important;
+            }
+        }
+
+        /* Petits téléphones */
+        @media (max-width: 480px) {
+            #categoryDetailPageContainer {
+                width: calc(100% - 16px);
+                margin-top: 22px !important;
+            }
+
+            .category-back-btn {
+                width: 100% !important;
+                min-height: 44px;
+                padding: 10px 14px !important;
+                font-size: 0.8rem;
+            }
+
+            .category-back-btn i {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Très petits écrans */
+        @media (max-width: 360px) {
+            #categoryDetailPageContainer {
+                width: calc(100% - 12px);
+            }
+
+            .category-back-btn {
+                font-size: 0.76rem;
+            }
+        }
+
+        /* Réduit les animations lorsque l'appareil le demande */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+            }
+        }
 </style>
 </head>
 <body>
@@ -2287,8 +2421,9 @@
 
     <!-- CONTENEUR PAGE DE CATEGORIE DÉDIÉE -->
     <div id="categoryDetailPageContainer" style="display: none; max-width: 1300px; margin: 40px auto; padding: 125px 15px 0; scroll-padding-top: 125px; box-sizing: border-box;">
-        <button class="btn-secondary" onclick="showMainPage()" style="margin-bottom: 25px; display: inline-flex; align-items: center; gap: 8px; width: auto; min-width: unset;">
-            <i class="fa-solid fa-arrow-left"></i> Retour à l'accueil
+        <button id="categoryBackButton" class="btn-secondary category-back-btn" onclick="showMainPage()" aria-label="Retour à l'accueil">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            <span>Retour à l'accueil</span>
         </button>
         <div id="categoryDetailContent"></div>
     </div>
