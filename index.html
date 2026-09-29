@@ -4554,7 +4554,63 @@ function openCategoryServiceInfo(catId, serviceIdx) {
         win.classList.toggle('open');
     }
 
-    function handleChatSubmit(e) {
+    async function handleChatSubmit(e) {
+        if (e) e.preventDefault();
+
+        const input = document.getElementById('chatbotInput');
+        if (!input) return;
+
+        const text = input.value.trim();
+        if (!text) return;
+
+        addChatMessage(text, 'user');
+        input.value = '';
+
+        const sendButton = document.querySelector('.chatbot-send');
+        if (sendButton) sendButton.disabled = true;
+
+        // Le contexte du site permet à l'IA de répondre précisément aux questions
+        // concernant les services, catégories, tarifs et informations visibles sur le site.
+        const siteContext = document.body ? document.body.innerText.slice(0, 50000) : '';
+
+        // Les mots-clés/réponses historiques ci-dessous restent intégralement dans le code
+        // sous handleLegacyChatSubmit() afin de ne rien supprimer de l'ancien chatbot.
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: text,
+                    siteContext,
+                    history: getChatHistory()
+                })
+            });
+
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok || !data.reply) {
+                throw new Error(data.error || 'Réponse IA indisponible');
+            }
+
+            addChatMessage(data.reply, 'bot');
+        } catch (error) {
+            console.error('Chatbot IA:', error);
+            addChatMessage('Je rencontre un petit problème de connexion avec l’assistant. Réessaie dans quelques secondes. 📲', 'bot');
+        } finally {
+            if (sendButton) sendButton.disabled = false;
+            input.focus();
+        }
+    }
+
+    function getChatHistory() {
+        const container = document.getElementById('chatbotMessages');
+        if (!container) return [];
+        return Array.from(container.querySelectorAll('.chatbot-msg')).slice(-12).map(el => ({
+            role: el.classList.contains('user') ? 'user' : 'assistant',
+            content: el.innerText.trim()
+        })).filter(item => item.content);
+    }
+
+function handleLegacyChatSubmit(e) {
         if (e) e.preventDefault();
 
         const input = document.getElementById('chatbotInput');
@@ -4680,4 +4736,19 @@ function openCategoryServiceInfo(catId, serviceIdx) {
 </script>
 
 
+
+<script id="homepage-force-top-on-load">
+(function(){
+  function goTop(){
+    try { window.scrollTo({top: 0, left: 0, behavior: 'auto'}); }
+    catch(e) { window.scrollTo(0, 0); }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', goTop, {once:true});
+  } else {
+    goTop();
+  }
+  window.addEventListener('load', goTop, {once:true});
+})();
+</script>
 </body></html>
