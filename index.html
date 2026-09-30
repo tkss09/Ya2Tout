@@ -1322,6 +1322,13 @@
             touch-action: manipulation;
         }
 
+        .scroll-btn:first-child {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation !important;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
         .scroll-btn:hover {
             background: var(--accent);
             border-color: var(--accent);
@@ -2854,7 +2861,7 @@ a[href="#mainPageContainer"] {
     <div class="glow-bg"></div>
 <!-- BOUTONS DE DÉFILEMENT (Milieu à droite) -->
     <div class="page-scroll-buttons">
-        <button class="scroll-btn" onclick="scrollToTop()" title="Remonter en haut"><i class="fa-solid fa-arrow-up"></i></button>
+        <button type="button" class="scroll-btn" onclick="scrollToTop()" ontouchend="scrollToTop()" title="Remonter en haut"><i class="fa-solid fa-arrow-up"></i></button>
     </div>
 
 <header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; max-width: 100vw; box-sizing: border-box; z-index: 1000; background-color: var(--bg-color, #121212); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease; contain: layout paint;">
@@ -4585,10 +4592,20 @@ function toggleFaq(element) {
         }
 
         function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            // Compatible tactile iPhone / Android : on cible aussi
+            // l'élément réellement scrollable du navigateur.
+            const scroller = document.scrollingElement || document.documentElement || document.body;
+
+            try {
+                scroller.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (e) {
+                scroller.scrollTop = 0;
+            }
+
+            // Fallback pour les anciens navigateurs mobiles / WebViews.
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
         }
 
         function scrollToBottom() {
