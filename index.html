@@ -4529,34 +4529,25 @@ function toggleFaq(element) {
         }
 
         function scrollToBottom() {
-            // Aller au véritable tout dernier point de la page.
-            // On prend la hauteur maximale de tous les éléments de défilement
-            // pour fonctionner aussi sur smartphone et avec le contenu dynamique.
-            const getBottom = () => Math.max(
-                document.body.scrollHeight,
-                document.documentElement.scrollHeight,
-                document.body.offsetHeight,
-                document.documentElement.offsetHeight,
-                document.body.clientHeight,
-                document.documentElement.clientHeight
+            // Aller directement au tout dernier point de la page.
+            // Aucun défilement progressif : un seul appui suffit, y compris sur smartphone.
+            const bottom = Math.max(
+                0,
+                Math.max(
+                    document.body.scrollHeight,
+                    document.documentElement.scrollHeight,
+                    document.body.offsetHeight,
+                    document.documentElement.offsetHeight,
+                    document.body.clientHeight,
+                    document.documentElement.clientHeight
+                ) - window.innerHeight
             );
 
-            const goBottom = () => {
-                const bottom = Math.max(0, getBottom() - window.innerHeight);
-                window.scrollTo({ top: bottom, left: 0, behavior: 'smooth' });
-                document.documentElement.scrollTop = bottom;
-                document.body.scrollTop = bottom;
-            };
-
-            goBottom();
-
-            // Le contenu peut encore changer de hauteur pendant le défilement.
-            // On recale donc la position pour garantir l'arrivée tout en bas.
-            requestAnimationFrame(goBottom);
-            setTimeout(goBottom, 250);
-            setTimeout(goBottom, 600);
-            setTimeout(goBottom, 1000);
+            window.scrollTo(0, bottom);
+            document.documentElement.scrollTop = bottom;
+            document.body.scrollTop = bottom;
         }
+
 
         const track = document.getElementById('reviewsTrack');
         let isDown = false;
