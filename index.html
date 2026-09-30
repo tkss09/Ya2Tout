@@ -2521,6 +2521,36 @@ a[href="#mainPageContainer"] {
 }
 </style>
 
+
+<style id="mobile-dvh-support">
+@supports (height: 100dvh) {
+    @media (max-width: 768px) {
+        #proofModal {
+            height: 100dvh !important;
+        }
+        #proofModal > .contact-modal {
+            max-height: calc(100dvh - 16px) !important;
+        }
+        #proofModalContent,
+        #proofModalContent img,
+        #proofModalContent video {
+            max-height: calc(100dvh - 145px) !important;
+        }
+    }
+
+    @media (max-width: 900px) and (orientation: landscape) {
+        #proofModal > .contact-modal {
+            max-height: calc(100dvh - 10px) !important;
+        }
+        #proofModalContent,
+        #proofModalContent img,
+        #proofModalContent video {
+            max-height: calc(100dvh - 100px) !important;
+        }
+    }
+}
+</style>
+
 </head>
 <body>
 
