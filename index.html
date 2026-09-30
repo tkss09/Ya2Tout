@@ -1252,29 +1252,7 @@
             touch-action: manipulation;
         }
         .modal-close-text:hover { color: #fff; }
-
-        .copy-notification {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #dc2626;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 0.82rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            z-index: 4000;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-align: center;
-            max-width: 90%;
-            will-change: transform;
-        }
-
-        .copy-notification.show { transform: translateX(-50%) translateY(0); }
-
-        /* BOUTONS DE DÉFILEMENT PLACÉS AU MILIEU DE LA PAGE À DROITE */
+/* BOUTONS DE DÉFILEMENT PLACÉS AU MILIEU DE LA PAGE À DROITE */
         .page-scroll-buttons {
             position: fixed;
             top: 50%;
@@ -2824,29 +2802,6 @@ a[href="#mainPageContainer"] {
     touch-action: manipulation !important;
 }
 </style>
-
-<style id="mobile-bottom-message-position-fix">
-/* Positionne le vrai message de copie légèrement au-dessus du bas
-   pour qu'il reste visible sur smartphone, au même niveau visuel
-   que les contrôles fixes (chatbot / défilement). */
-@media (max-width: 900px) {
-    #copyNotification {
-        bottom: 62px !important;
-    }
-}
-
-@media (max-width: 900px) and (orientation: landscape) {
-    #copyNotification {
-        bottom: 54px !important;
-    }
-}
-
-/* Le message reste caché tant qu'une copie réussie n'a pas été effectuée. */
-#copyNotification:not(.show) {
-    pointer-events: none !important;
-}
-</style>
-
 </head>
 <body>
 
@@ -2858,10 +2813,7 @@ a[href="#mainPageContainer"] {
     </div>
 
     <div class="glow-bg"></div>
-
-    <div class="copy-notification" id="copyNotification">📋 Message copié ! Colle-le sur Snapchat.</div>
-
-    <!-- BOUTONS DE DÉFILEMENT (Milieu à droite) -->
+<!-- BOUTONS DE DÉFILEMENT (Milieu à droite) -->
     <div class="page-scroll-buttons">
         <button class="scroll-btn" onclick="scrollToTop()" title="Remonter en haut"><i class="fa-solid fa-arrow-up"></i></button>
         <button class="scroll-btn" onclick="scrollToBottom()" title="Aller tout en bas"><i class="fa-solid fa-arrow-down"></i></button>
@@ -4533,8 +4485,7 @@ function openCategoryServiceInfo(catId, serviceIdx) {
         function copyAndOpenSnapchat(text) {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(text).then(() => {
-                    showCopyNotification();
-                    setTimeout(() => {
+                            setTimeout(() => {
                         window.open(mySnapchatUrl, '_blank');
                     }, 600);
                 }).catch(() => {
@@ -4557,8 +4508,7 @@ function openCategoryServiceInfo(catId, serviceIdx) {
             const trialText = "Bonjour 👑NUMÉRO 1👑, je souhaite obtenir une consultation gratuite concernant mes démarches administratives.";
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(trialText).then(() => {
-                    showCopyNotification();
-                    setTimeout(() => {
+                            setTimeout(() => {
                         window.open(mySnapchatUrl, '_blank');
                     }, 600);
                 });
@@ -4566,16 +4516,7 @@ function openCategoryServiceInfo(catId, serviceIdx) {
                 window.open(mySnapchatUrl, '_blank');
             }
         }
-
-        function showCopyNotification() {
-            const notif = document.getElementById('copyNotification');
-            notif.classList.add('show');
-            setTimeout(() => {
-                notif.classList.remove('show');
-            }, 3000);
-        }
-
-        function toggleFaq(element) {
+function toggleFaq(element) {
             const item = element.parentElement;
             item.classList.toggle('active');
         }
