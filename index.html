@@ -1415,7 +1415,9 @@
         }
 
         /* Bouton retour : toujours visible, lisible et facile à toucher */
+        /* Retour à l'accueil : animation clignotante comme les autres CTA du site */
         .category-back-btn {
+            animation: customBlink 1.5s infinite ease-in-out;
             position: relative;
             z-index: 5;
             display: inline-flex !important;
@@ -2485,7 +2487,7 @@ html, body {
             <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('catalog-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">Services</li>
             <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('tutorial-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">Démarches</li>
             <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('faq-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">FAQ</li>
-            <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('proof-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">Retours Clients</li>
+            <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('retours-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">Retours Clients</li>
             <!-- Bouton Consultation clignotant -->
             <li><span class="nav-trial-btn nav-trial-btn-blink" onclick="openTrialModal()">📋 Consultation</span></li>
         </ul>
@@ -2536,12 +2538,12 @@ html, body {
             <div style="width: 50px; height: 50px; background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: #dc2626; font-size: 1.3rem;">
                 <i class="fa-solid fa-circle-info"></i>
             </div>
-            <h3 style="margin-bottom: 8px;" id="infoModalTitle">Demande d'informations</h3>
+            <h3 style="margin-bottom: 8px;" id="infoModalTitle">Carte Grise</h3>
             <p style="font-size: 0.9rem; color: #fff; font-weight: 600; margin-bottom: 15px; background: rgba(255,255,255,0.04); padding: 12px; border-radius: 10px; border: 1px solid var(--border); word-break: break-word;">
                 Besoin de plus d'informations concernant ce service ?
             </p>
             <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px;">
-                Si tu as besoin de plus d'informations, contacte-moi directement via Snapchat. En cliquant ci-dessous, le message sera copié et tu seras dirigé vers mon Snapchat !
+                Si tu as besoin de plus d'informations, contacte-nous directement via Snapchat. En cliquant ci-dessous, le message sera copié et tu seras dirigé vers mon Snapchat !
             </p>
             <div class="social-buttons">
                 <button class="social-btn snapchat-btn" id="confirmInfoSnapBtn" style="padding: 14px; font-weight: 800;">
