@@ -3556,7 +3556,7 @@ body.ci-lock-scroll { overflow: hidden !important; }
     backface-visibility: hidden;
 }
 </style>
-</head>
+\n<style id="cinematic-fire-style-override">\n/* Style « éclair enflammé » inspiré de la référence fournie : branches, halo orange et coeur blanc. */\n#cinematicIntro .ci-lightning{\n    z-index: 7;\n    overflow: visible;\n    filter: none;\n    mix-blend-mode: screen;\n}\n#cinematicIntro .ci-bolt-glow{\n    fill:none;\n    stroke:#ff4a00;\n    stroke-width:34;\n    stroke-linecap:round;\n    stroke-linejoin:round;\n    stroke-dasharray:1000;\n    stroke-dashoffset:1000;\n    opacity:0;\n    filter:blur(9px) drop-shadow(0 0 18px rgba(255,66,0,.98)) drop-shadow(0 0 38px rgba(255,128,0,.72));\n}\n#cinematicIntro .ci-bolt-fire{\n    fill:none;\n    stroke:#ff8b00;\n    stroke-width:14;\n    stroke-linecap:round;\n    stroke-linejoin:round;\n    stroke-dasharray:1000;\n    stroke-dashoffset:1000;\n    opacity:0;\n    filter:drop-shadow(0 0 8px rgba(255,76,0,1)) drop-shadow(0 0 17px rgba(255,166,36,.9));\n}\n#cinematicIntro .ci-bolt{\n    fill:none;\n    stroke:#fffaf0;\n    stroke-width:5;\n    stroke-linecap:round;\n    stroke-linejoin:round;\n    stroke-dasharray:1000;\n    stroke-dashoffset:1000;\n    opacity:0;\n    filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 8px rgba(255,190,70,.9));\n}\n#cinematicIntro .ci-bolt-glow.left,#cinematicIntro .ci-bolt-fire.left,#cinematicIntro .ci-bolt.left,\n#cinematicIntro .ci-bolt-glow.right,#cinematicIntro .ci-bolt-fire.right,#cinematicIntro .ci-bolt.right{\n    animation-duration:4.4s;\n    animation-timing-function:cubic-bezier(.15,.75,.1,1);\n    animation-iteration-count:1;\n    animation-fill-mode:both;\n}\n#cinematicIntro .ci-bolt-glow.left,#cinematicIntro .ci-bolt-fire.left,#cinematicIntro .ci-bolt.left{animation-name:ci-fire-strike-left;}\n#cinematicIntro .ci-bolt-glow.right,#cinematicIntro .ci-bolt-fire.right,#cinematicIntro .ci-bolt.right{animation-name:ci-fire-strike-right;}\n\n#cinematicIntro .ci-fire-branch{\n    fill:none;\n    stroke:#ff6b00;\n    stroke-width:8;\n    stroke-linecap:round;\n    stroke-linejoin:round;\n    stroke-dasharray:180 820;\n    stroke-dashoffset:180;\n    opacity:0;\n    filter:blur(2px) drop-shadow(0 0 7px rgba(255,90,0,.95)) drop-shadow(0 0 15px rgba(255,170,50,.65));\n    animation:ci-fire-branch 4.4s ease-out both;\n}\n#cinematicIntro .ci-fire-fork{\n    fill:none;\n    stroke:#ffb02e;\n    stroke-width:5;\n    stroke-linecap:round;\n    stroke-linejoin:round;\n    opacity:0;\n    filter:drop-shadow(0 0 5px rgba(255,110,0,.95));\n    animation:ci-fire-fork 4.4s ease-out both;\n}\n#cinematicIntro .ci-fire-sparks{\n    fill:#ffd27a;\n    stroke:#ff8a00;\n    stroke-width:2;\n    opacity:0;\n    filter:drop-shadow(0 0 5px rgba(255,120,0,.95)) drop-shadow(0 0 10px rgba(255,210,100,.7));\n    animation:ci-fire-sparks 4.4s ease-out both;\n}\n#cinematicIntro .ci-fire-sparks path{fill:none;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;}\n\n#cinematicIntro .ci-impact-core{\n    fill:#fff;\n    stroke:#fff3ce;\n    stroke-width:4;\n    filter:drop-shadow(0 0 7px #fff) drop-shadow(0 0 18px #ffae00) drop-shadow(0 0 32px #ff4a00);\n}\n#cinematicIntro .ci-impact-ring{\n    fill:none;\n    stroke:#ffca52;\n    stroke-width:7;\n    filter:drop-shadow(0 0 9px #ff7b00) drop-shadow(0 0 22px #fff);\n}\n\n/* Contour : décharge chaude, vive et légèrement irrégulière après le choc. */\n#cinematicIntro .ci-logo-outline{\n    z-index:8;\n    filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px rgba(255,183,44,.98)) drop-shadow(0 0 28px rgba(255,66,0,.9));\n}\n#cinematicIntro .ci-outline-glowpath{\n    stroke:#ff3d00;\n    stroke-width:20;\n    opacity:0;\n    stroke-dasharray:125 875;\n    stroke-dashoffset:1000;\n    filter:blur(6px) drop-shadow(0 0 15px rgba(255,77,0,.98));\n    animation:ci-fire-outline 4.4s cubic-bezier(.18,.7,.12,1) both;\n}\n#cinematicIntro .ci-outline-firepath{\n    stroke:#ff7a00;\n    stroke-width:11;\n    opacity:0;\n    stroke-dasharray:115 885;\n    stroke-dashoffset:1000;\n    filter:drop-shadow(0 0 7px rgba(255,125,0,1)) drop-shadow(0 0 15px rgba(255,200,70,.9));\n    animation:ci-fire-outline 4.4s cubic-bezier(.18,.7,.12,1) both;\n}\n#cinematicIntro .ci-outline-corepath{\n    stroke:#fff4d4;\n    stroke-width:4.5;\n    opacity:0;\n    stroke-dasharray:90 910;\n    stroke-dashoffset:1000;\n    filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 8px #ffbf4d);\n    animation:ci-fire-outline 4.4s cubic-bezier(.18,.7,.12,1) both;\n}\n\n@keyframes ci-fire-strike-left{\n  0%,18%{opacity:0;stroke-dashoffset:1000;}\n  24%{opacity:.85;stroke-dashoffset:920;}\n  40%{opacity:1;stroke-dashoffset:500;}\n  45.8%{opacity:1;stroke-dashoffset:120;}\n  46.59%{opacity:1;stroke-dashoffset:0;}\n  47.2%{opacity:1;stroke-dashoffset:0;}\n  49%{opacity:.12;stroke-dashoffset:0;}\n  50%{opacity:.78;}\n  51.5%{opacity:0;}\n  100%{opacity:0;stroke-dashoffset:0;}\n}\n@keyframes ci-fire-strike-right{\n  0%,18%{opacity:0;stroke-dashoffset:1000;}\n  24%{opacity:.85;stroke-dashoffset:920;}\n  40%{opacity:1;stroke-dashoffset:500;}\n  45.8%{opacity:1;stroke-dashoffset:120;}\n  46.59%{opacity:1;stroke-dashoffset:0;}\n  47.2%{opacity:1;stroke-dashoffset:0;}\n  49%{opacity:.12;stroke-dashoffset:0;}\n  50%{opacity:.78;}\n  51.5%{opacity:0;}\n  100%{opacity:0;stroke-dashoffset:0;}\n}\n@keyframes ci-fire-branch{\n  0%,22%{opacity:0;stroke-dashoffset:180;}\n  30%{opacity:.2;stroke-dashoffset:130;}\n  44%{opacity:.92;stroke-dashoffset:25;}\n  48%{opacity:1;stroke-dashoffset:0;}\n  50%{opacity:.4;}\n  53%{opacity:0;}\n  100%{opacity:0;}\n}\n@keyframes ci-fire-fork{\n  0%,26%{opacity:0;transform:scale(.85);transform-origin:center;}\n  42%{opacity:.25;}\n  47%{opacity:1;transform:scale(1);} 50%{opacity:.1;} 55%{opacity:0;} 100%{opacity:0;}\n}\n@keyframes ci-fire-sparks{\n  0%,28%{opacity:0;transform:scale(.2)}\n  42%{opacity:.75;transform:scale(.8)}\n  47%{opacity:1;transform:scale(1)}\n  53%{opacity:.2;transform:scale(1.05)}\n  62%{opacity:0;transform:scale(1.15)}\n  100%{opacity:0;}\n}\n@keyframes ci-fire-outline{\n  0%,49%{opacity:0;stroke-dashoffset:1000;}\n  51%{opacity:1;stroke-dashoffset:1000;}\n  58%{opacity:1;stroke-dashoffset:840;}\n  68%{opacity:1;stroke-dashoffset:610;}\n  78%{opacity:1;stroke-dashoffset:390;}\n  88%{opacity:1;stroke-dashoffset:175;}\n  97%{opacity:.98;stroke-dashoffset:25;}\n  100%{opacity:0;stroke-dashoffset:0;}\n}\n\n@media (max-width:700px){\n  #cinematicIntro .ci-bolt-glow{stroke-width:24;}\n  #cinematicIntro .ci-bolt-fire{stroke-width:10;}\n  #cinematicIntro .ci-bolt{stroke-width:4;}\n  #cinematicIntro .ci-fire-branch{stroke-width:6;}\n  #cinematicIntro .ci-fire-fork{stroke-width:4;}\n  #cinematicIntro .ci-logo-outline{inset:-4.8% -5% -3.8% -5%;width:110%;height:109%;}\n}\n</style>\n</head>
 <body>
 
 <!-- OUVERTURE CINÉMATIQUE AUTOMATIQUE -->
@@ -3567,15 +3567,44 @@ body.ci-lock-scroll { overflow: hidden !important; }
     </div>
     <div class="ci-flame" aria-hidden="true"></div>
     <svg class="ci-lightning" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
-    <!-- Éclair gauche : trajet clairement latéral -> haut-centre du logo -->
-    <path class="ci-bolt-glow left" d="M -40,540 L 35,512 L 78,470 L 125,492 L 172,432 L 222,450 L 268,392 L 318,414 L 360,350 L 402,372 L 442,296 L 475,250 L 500,220" />
-    <path class="ci-bolt-fire left" d="M -40,540 L 35,512 L 78,470 L 125,492 L 172,432 L 222,450 L 268,392 L 318,414 L 360,350 L 402,372 L 442,296 L 475,250 L 500,220" />
-    <path class="ci-bolt left" d="M -40,540 L 35,512 L 78,470 L 125,492 L 172,432 L 222,450 L 268,392 L 318,414 L 360,350 L 402,372 L 442,296 L 475,250 L 500,220" />
+    <!-- Eclairs « feu » : départs latéraux, convergence vers le haut-centre du logo. -->
+    <g class="ci-fire-bolt-group left">
+        <path class="ci-bolt-glow left" pathLength="1000" d="M -70,540 C 15,532 42,505 78,468 L 116,492 L 158,430 L 208,454 L 258,392 L 308,414 L 350,354 L 395,372 L 430,305 L 468,267 L 500,220" />
+        <path class="ci-bolt-fire left" pathLength="1000" d="M -70,540 C 15,532 42,505 78,468 L 116,492 L 158,430 L 208,454 L 258,392 L 308,414 L 350,354 L 395,372 L 430,305 L 468,267 L 500,220" />
+        <path class="ci-bolt left" pathLength="1000" d="M -70,540 C 15,532 42,505 78,468 L 116,492 L 158,430 L 208,454 L 258,392 L 308,414 L 350,354 L 395,372 L 430,305 L 468,267 L 500,220" />
 
-    <!-- Éclair droit : miroir du gauche -> même point d'impact -->
-    <path class="ci-bolt-glow right" d="M 1040,540 L 965,512 L 922,470 L 875,492 L 828,432 L 778,450 L 732,392 L 682,414 L 640,350 L 598,372 L 558,296 L 525,250 L 500,220" />
-    <path class="ci-bolt-fire right" d="M 1040,540 L 965,512 L 922,470 L 875,492 L 828,432 L 778,450 L 732,392 L 682,414 L 640,350 L 598,372 L 558,296 L 525,250 L 500,220" />
-    <path class="ci-bolt right" d="M 1040,540 L 965,512 L 922,470 L 875,492 L 828,432 L 778,450 L 732,392 L 682,414 L 640,350 L 598,372 L 558,296 L 525,250 L 500,220" />
+        <!-- branches organiques -->
+        <path class="ci-fire-branch" pathLength="1000" d="M 78,468 L 46,430 L 18,422 L -8,390" />
+        <path class="ci-fire-branch" pathLength="1000" d="M 158,430 L 142,384 L 104,360 L 88,320" />
+        <path class="ci-fire-branch" pathLength="1000" d="M 258,392 L 250,344 L 218,316 L 225,280" />
+        <path class="ci-fire-branch" pathLength="1000" d="M 350,354 L 334,312 L 350,274 L 336,242" />
+        <path class="ci-fire-branch" pathLength="1000" d="M 430,305 L 418,274 L 438,244 L 430,210" />
+        <path class="ci-fire-fork" pathLength="1000" d="M 468,267 L 448,238 L 454,208 L 434,190" />
+        <path class="ci-fire-fork" pathLength="1000" d="M 468,267 L 486,244 L 482,218 L 493,198" />
+    </g>
+
+    <g class="ci-fire-bolt-group right">
+        <path class="ci-bolt-glow right" pathLength="1000" d="M 1070,540 C 985,532 958,505 922,468 L 884,492 L 842,430 L 792,454 L 742,392 L 692,414 L 650,354 L 605,372 L 570,305 L 532,267 L 500,220" />
+        <path class="ci-bolt-fire right" pathLength="1000" d="M 1070,540 C 985,532 958,505 922,468 L 884,492 L 842,430 L 792,454 L 742,392 L 692,414 L 650,354 L 605,372 L 570,305 L 532,267 L 500,220" />
+        <path class="ci-bolt right" pathLength="1000" d="M 1070,540 C 985,532 958,505 922,468 L 884,492 L 842,430 L 792,454 L 742,392 L 692,414 L 650,354 L 605,372 L 570,305 L 532,267 L 500,220" />
+
+        <!-- branches organiques -->
+        <path class="ci-fire-branch" pathLength="1000" d="M 922,468 L 954,430 L 982,422 L 1008,390" />
+        <path class="ci-fire-branch" pathLength="1000" d="M 842,430 L 858,384 L 896,360 L 912,320" />
+        <path class="ci-fire-branch" pathLength="1000" d="M 742,392 L 750,344 L 782,316 L 775,280" />
+        <path class="ci-fire-branch" pathLength="1000" d="M 650,354 L 666,312 L 650,274 L 664,242" />
+        <path class="ci-fire-branch" pathLength="1000" d="M 570,305 L 582,274 L 562,244 L 570,210" />
+        <path class="ci-fire-fork" pathLength="1000" d="M 532,267 L 552,238 L 546,208 L 566,190" />
+        <path class="ci-fire-fork" pathLength="1000" d="M 532,267 L 514,244 L 518,218 L 507,198" />
+    </g>
+
+    <!-- petits arcs/sparks proches de la collision -->
+    <g class="ci-fire-sparks" aria-hidden="true">
+        <circle cx="110" cy="420" r="3"/><circle cx="202" cy="330" r="2.5"/><circle cx="315" cy="285" r="3"/><circle cx="405" cy="245" r="2"/><circle cx="454" cy="175" r="2.5"/>
+        <circle cx="890" cy="420" r="3"/><circle cx="798" cy="330" r="2.5"/><circle cx="685" cy="285" r="3"/><circle cx="595" cy="245" r="2"/><circle cx="546" cy="175" r="2.5"/>
+        <path d="M 132,390 l 18,-15 l 12,7"/><path d="M 868,390 l -18,-15 l -12,7"/>
+        <path d="M 285,322 l 12,-18 l 17,4"/><path d="M 715,322 l -12,-18 l -17,4"/>
+    </g>
 
     <circle class="ci-impact-ring" cx="500" cy="220" r="26" />
     <circle class="ci-impact-core" cx="500" cy="220" r="18" />
