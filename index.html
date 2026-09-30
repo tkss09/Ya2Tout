@@ -2451,8 +2451,19 @@ html, body {
 }
 
 @keyframes ya2tooScrollBlink {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: .45; transform: scale(1.08); }
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.08);
+        background: #dc2626 !important;
+        border-color: #dc2626 !important;
+        color: #fff !important;
+        box-shadow: 0 0 0 8px rgba(220, 38, 38, .20), 0 0 22px rgba(220, 38, 38, .65);
+    }
 }
     35% { transform: translateY(-5px) scale(1.06); }
     55% { transform: translateY(0) scale(1); }
@@ -2557,8 +2568,8 @@ a[href="#mainPageContainer"] {
             <li class="active" onclick="showMainPage()">Accueil</li>
             <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('catalog-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">Services</li>
             <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('tutorial-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">Démarches</li>
-            <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('faq-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">FAQ</li>
-            <li onclick="showMainPage(); setTimeout(() => window.scrollTo({top: document.getElementById('retours-section').getBoundingClientRect().top + window.scrollY - 125, behavior: 'smooth'}), 50)">Retours Clients</li>
+            <li onclick="showMainPage(); setTimeout(() => scrollToNavSection('faq-section'), 80)">FAQ</li>
+            <li onclick="showMainPage(); setTimeout(() => scrollToNavSection('retours-section'), 80)">Retours Clients</li>
             <!-- Bouton Consultation clignotant -->
             <li><span class="nav-trial-btn nav-trial-btn-blink" onclick="openTrialModal()">📋 Consultation</span></li>
         </ul>
@@ -4055,6 +4066,21 @@ function openCategoryServiceInfo(catId, serviceIdx) {
             document.getElementById('mainPageContainer').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        function scrollToNavSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+
+            const header = document.querySelector('header');
+            const headerHeight = header ? header.getBoundingClientRect().height : 0;
+            const targetTop = section.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+            window.scrollTo({
+                top: Math.max(0, targetTop),
+                behavior: 'smooth'
+            });
+        }
+
 
         function openOrderPopupDirect(catId, serviceIdx) {
             const cat = categories.find(c => c.id === catId);
