@@ -2815,39 +2815,35 @@ a[href="#mainPageContainer"] {
 </style>
 
 
+<style id="scroll-bottom-click-fix">
+/* La flèche BAS reste toujours cliquable, même avec les éléments fixes. */
+.page-scroll-buttons .scroll-btn:last-child {
+    position: relative;
+    z-index: 10001 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+}
+</style>
+
 <style id="mobile-bottom-message-position-fix">
-/* Remonte légèrement les notifications/messages rouges en bas sur smartphone,
-   pour éviter la barre du navigateur mobile. */
+/* Positionne le vrai message de copie légèrement au-dessus du bas
+   pour qu'il reste visible sur smartphone, au même niveau visuel
+   que les contrôles fixes (chatbot / défilement). */
 @media (max-width: 900px) {
-    .toast,
-    .notification,
-    .copy-message,
-    .copy-toast,
-    .success-message,
-    .clipboard-message,
-    #copyMessage,
-    #copyToast,
-    #toast,
-    [class*="copy"][class*="message"],
-    [id*="copy"][id*="message"] {
-        bottom: 72px !important;
+    #copyNotification {
+        bottom: 62px !important;
     }
 }
 
 @media (max-width: 900px) and (orientation: landscape) {
-    .toast,
-    .notification,
-    .copy-message,
-    .copy-toast,
-    .success-message,
-    .clipboard-message,
-    #copyMessage,
-    #copyToast,
-    #toast,
-    [class*="copy"][class*="message"],
-    [id*="copy"][id*="message"] {
-        bottom: 58px !important;
+    #copyNotification {
+        bottom: 54px !important;
     }
+}
+
+/* Le message reste caché tant qu'une copie réussie n'a pas été effectuée. */
+#copyNotification:not(.show) {
+    pointer-events: none !important;
 }
 </style>
 
@@ -4592,10 +4588,24 @@ function openCategoryServiceInfo(catId, serviceIdx) {
         }
 
         function scrollToBottom() {
-            window.scrollTo({
-                top: document.documentElement.scrollHeight,
-                behavior: 'smooth'
-            });
+            try {
+                const scrollElement = document.scrollingElement || document.documentElement || document.body;
+                const bottom = Math.max(
+                    0,
+                    scrollElement.scrollHeight - window.innerHeight
+                );
+
+                window.scrollTo({
+                    top: bottom,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+            } catch (e) {
+                window.scrollTo(0, Math.max(
+                    0,
+                    (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight
+                ));
+            }
         }
 
         const track = document.getElementById('reviewsTrack');
