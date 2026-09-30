@@ -2439,6 +2439,77 @@ html, body {
     }
 }
 </style>
+
+<style id="ya2too-navigation-attention">
+/* Indiquer clairement que le bouton Haut est utilisable, surtout en fin de page */
+.page-scroll-buttons .scroll-btn:first-child {
+    transform-origin: center;
+}
+
+.page-scroll-buttons .scroll-btn:first-child.ya2too-near-bottom {
+    animation: ya2tooScrollBlink 1s ease-in-out infinite;
+}
+
+@keyframes ya2tooScrollBlink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .45; transform: scale(1.08); }
+}
+    35% { transform: translateY(-5px) scale(1.06); }
+    55% { transform: translateY(0) scale(1); }
+    70% { transform: translateY(-3px) scale(1.03); }
+}
+
+/* Animation douce pour attirer l'attention sur Retour à l'accueil */
+[id*="categoryDetailPageContainer"] .back-home-btn,
+.category-detail-page .back-home-btn,
+button[onclick*="showMainPage"],
+a[href="#mainPageContainer"] {
+    animation: ya2tooHomePulse 2.2s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes ya2tooHomePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.025); }
+}
+
+/* Smartphone : boutons suffisamment grands et bien positionnés */
+@media (max-width: 700px) {
+    .page-scroll-buttons {
+        right: 10px !important;
+        bottom: 18px !important;
+        gap: 8px !important;
+        z-index: 9999 !important;
+    }
+
+    .page-scroll-buttons .scroll-btn {
+        width: 46px !important;
+        height: 46px !important;
+        min-width: 46px !important;
+        min-height: 46px !important;
+        border-radius: 50% !important;
+    }
+
+    [id*="categoryDetailPageContainer"] .back-home-btn,
+    .category-detail-page .back-home-btn,
+    button[onclick*="showMainPage"],
+    a[href="#mainPageContainer"] {
+        min-height: 46px;
+    }
+}
+
+/* Respecter les préférences d'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+    .page-scroll-buttons .scroll-btn:first-child.ya2too-near-bottom,
+    [id*="categoryDetailPageContainer"] .back-home-btn,
+    .category-detail-page .back-home-btn,
+    button[onclick*="showMainPage"],
+    a[href="#mainPageContainer"] {
+        animation: none !important;
+    }
+}
+</style>
+
 </head>
 <body>
 
@@ -4723,4 +4794,19 @@ function openCategoryServiceInfo(catId, serviceIdx) {
   window.addEventListener('load', goTop, {once:true});
 })();
 </script>
+
+<script id="ya2too-scroll-hint">
+(function () {
+    function updateScrollHint() {
+        const btn = document.querySelector('.page-scroll-buttons .scroll-btn:first-child');
+        if (!btn) return;
+        const nearBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 260;
+        btn.classList.toggle('ya2too-near-bottom', nearBottom);
+    }
+    window.addEventListener('scroll', updateScrollHint, {passive:true});
+    window.addEventListener('resize', updateScrollHint);
+    document.addEventListener('DOMContentLoaded', updateScrollHint);
+})();
+</script>
+
 </body></html>
