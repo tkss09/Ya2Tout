@@ -1202,6 +1202,45 @@
 
         .modal-overlay.open .contact-modal { transform: scale(1); }
 
+        /* Notification Snapchat : juste sous la fenêtre popup */
+        .snap-copy-notification {
+            position: fixed;
+            z-index: 10050;
+            display: none;
+            width: max-content;
+            max-width: calc(100vw - 24px);
+            box-sizing: border-box;
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: #dc2626;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,.22);
+            box-shadow: 0 8px 24px rgba(0,0,0,.35);
+            font-size: .85rem;
+            font-weight: 800;
+            text-align: center;
+            line-height: 1.35;
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(-50%, -6px);
+            transition: opacity .2s ease, transform .2s ease;
+        }
+
+        .snap-copy-notification.show {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        @media (max-width: 700px) {
+            .snap-copy-notification {
+                width: calc(100vw - 24px);
+                max-width: calc(100vw - 24px);
+                padding: 10px 12px;
+                font-size: .8rem;
+            }
+        }
+
         .contact-modal h3 {
             font-size: 1.25rem;
             font-weight: 800;
@@ -2816,7 +2855,6 @@ a[href="#mainPageContainer"] {
 <!-- BOUTONS DE DÉFILEMENT (Milieu à droite) -->
     <div class="page-scroll-buttons">
         <button class="scroll-btn" onclick="scrollToTop()" title="Remonter en haut"><i class="fa-solid fa-arrow-up"></i></button>
-        <button class="scroll-btn" onclick="scrollToBottom()" title="Aller tout en bas"><i class="fa-solid fa-arrow-down"></i></button>
     </div>
 
 <header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; max-width: 100vw; box-sizing: border-box; z-index: 1000; background-color: var(--bg-color, #121212); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease; contain: layout paint;">
@@ -2891,6 +2929,7 @@ a[href="#mainPageContainer"] {
             </div>
             <span class="modal-close-text" onclick="closeTrialModal()">Fermer cette fenêtre</span>
         </div>
+        <div class="snap-copy-notification" id="trialSnapCopyNotification">✅ Le message est bien copié ! Faites copier-coller sur Snapchat.</div>
     </div>
 
     <div class="modal-overlay" id="categoryInfoModal">
@@ -2912,6 +2951,7 @@ a[href="#mainPageContainer"] {
             </div>
             <span class="modal-close-text" onclick="closeCategoryInfoModal()">Fermer</span>
         </div>
+        <div class="snap-copy-notification" id="categoryInfoSnapCopyNotification">✅ Le message est bien copié ! Faites copier-coller sur Snapchat.</div>
     </div>
 
     <div class="modal-overlay" id="serviceDetailModal">
@@ -2947,6 +2987,7 @@ a[href="#mainPageContainer"] {
             </div>
             <span class="modal-close-text" onclick="closeOrderPopup()">Annuler</span>
         </div>
+        <div class="snap-copy-notification" id="orderSnapCopyNotification">✅ Le message est bien copié ! Faites copier-coller sur Snapchat.</div>
     </div>
 
     <!-- CONTENEUR PAGE PRINCIPALE -->
@@ -4321,8 +4362,7 @@ function openCategoryServiceInfo(catId, serviceIdx) {
             const confirmInfoBtn = document.getElementById('confirmInfoSnapBtn');
             if (confirmInfoBtn) {
                 confirmInfoBtn.onclick = function() {
-                    closeCategoryInfoModal();
-                    copyAndOpenSnapchat(infoText);
+                    copyAndOpenSnapchat(infoText, 'categoryInfoModal');
                 };
             }
 
@@ -4371,8 +4411,7 @@ function openCategoryServiceInfo(catId, serviceIdx) {
 
             const confirmBtn = document.getElementById('confirmOrderSnapBtn');
             confirmBtn.onclick = function() {
-                closeOrderPopup();
-                copyAndOpenSnapchat(currentOrderText);
+                copyAndOpenSnapchat(currentOrderText, 'orderPopupModal');
             };
         }
 
@@ -4473,8 +4512,7 @@ function openCategoryServiceInfo(catId, serviceIdx) {
 
             const confirmBtn = document.getElementById('confirmOrderSnapBtn');
             confirmBtn.onclick = function() {
-                closeOrderPopup();
-                copyAndOpenSnapchat(currentOrderText);
+                copyAndOpenSnapchat(currentOrderText, 'orderPopupModal');
             };
         }
 
@@ -4482,13 +4520,35 @@ function openCategoryServiceInfo(catId, serviceIdx) {
             document.getElementById('orderPopupModal').classList.remove('open');
         }
 
-        function copyAndOpenSnapchat(text) {
+        function showSnapCopyNotification(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            const popup = modal.querySelector('.contact-modal');
+            const notification = modal.querySelector('.snap-copy-notification');
+            if (!popup || !notification) return;
+
+            const rect = popup.getBoundingClientRect();
+            notification.style.left = `${rect.left + rect.width / 2}px`;
+            notification.style.top = `${rect.bottom + 10}px`;
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2200);
+        }
+
+        function copyAndOpenSnapchat(text, modalId) {
+            const copied = () => {
+                if (modalId) showSnapCopyNotification(modalId);
+                setTimeout(() => {
+                    if (modalId === 'categoryInfoModal') closeCategoryInfoModal();
+                    if (modalId === 'orderPopupModal') closeOrderPopup();
+                    window.open(mySnapchatUrl, '_blank');
+                }, 900);
+            };
+
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(() => {
-                            setTimeout(() => {
-                        window.open(mySnapchatUrl, '_blank');
-                    }, 600);
-                }).catch(() => {
+                navigator.clipboard.writeText(text).then(copied).catch(() => {
                     window.open(mySnapchatUrl, '_blank');
                 });
             } else {
@@ -4508,9 +4568,12 @@ function openCategoryServiceInfo(catId, serviceIdx) {
             const trialText = "Bonjour 👑NUMÉRO 1👑, je souhaite obtenir une consultation gratuite concernant mes démarches administratives.";
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(trialText).then(() => {
-                            setTimeout(() => {
+                    showSnapCopyNotification('trialModal');
+                    setTimeout(() => {
                         window.open(mySnapchatUrl, '_blank');
-                    }, 600);
+                    }, 900);
+                }).catch(() => {
+                    window.open(mySnapchatUrl, '_blank');
                 });
             } else {
                 window.open(mySnapchatUrl, '_blank');
