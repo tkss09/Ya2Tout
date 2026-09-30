@@ -2832,25 +2832,23 @@ a[href="#mainPageContainer"] {
 </style>
 
 
-<style id="scroll-top-mobile-touch-fix">
-/* La flèche HAUT doit rester directement tactile sur smartphone. */
-.page-scroll-buttons .scroll-btn:first-child {
+<style id="scroll-buttons-touch-fix">
+/* Les flèches restent réellement cliquables sur écran tactile. */
+.page-scroll-buttons {
+    z-index: 2147483646 !important;
+    pointer-events: none !important;
+}
+.page-scroll-buttons .scroll-btn {
     position: relative;
-    z-index: 10002 !important;
+    z-index: 2147483647 !important;
     pointer-events: auto !important;
     touch-action: manipulation !important;
     -webkit-user-select: none !important;
     user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
-</style>
-
-<style id="scroll-bottom-click-fix">
-/* La flèche BAS reste toujours cliquable, même avec les éléments fixes. */
-.page-scroll-buttons .scroll-btn:last-child {
-    position: relative;
-    z-index: 10001 !important;
+#scrollToTopButton {
     pointer-events: auto !important;
-    touch-action: manipulation !important;
 }
 </style>
 </head>
@@ -2866,7 +2864,9 @@ a[href="#mainPageContainer"] {
     <div class="glow-bg"></div>
 <!-- BOUTONS DE DÉFILEMENT (Milieu à droite) -->
     <div class="page-scroll-buttons">
-        <button type="button" class="scroll-btn" onclick="scrollToTop(event)" ontouchend="scrollToTop(event)" title="Remonter en haut" aria-label="Remonter en haut"><i class="fa-solid fa-arrow-up"></i></button>
+        <button id="scrollToTopButton" class="scroll-btn" type="button" onclick="scrollToTop()" title="Remonter en haut" aria-label="Remonter tout en haut">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
     </div>
 
 <header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; max-width: 100vw; box-sizing: border-box; z-index: 1000; background-color: var(--bg-color, #121212); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease; contain: layout paint;">
@@ -4596,34 +4596,20 @@ function toggleFaq(element) {
             item.classList.toggle('active');
         }
 
-        function scrollToTop(event) {
-            // Sur mobile, le touchend est utilisé en plus du click afin que
-            // la flèche fonctionne même lorsque le navigateur gère le scroll tactile.
-            if (event && event.type === 'touchend') {
-                event.preventDefault();
-            }
+        function scrollToTop() {
+            // Retour fiable tout en haut, y compris sur iPhone/Android.
+            // Certains navigateurs mobiles utilisent document.scrollingElement
+            // plutôt que window comme conteneur de défilement.
+            const scrollingElement = document.scrollingElement || document.documentElement || document.body;
 
-            // Retour DIRECT en haut : on neutralise temporairement le
-            // scroll-behavior:smooth défini globalement sur html/body.
-            const html = document.documentElement;
-            const body = document.body;
-            const previousHtmlBehavior = html.style.scrollBehavior;
-            const previousBodyBehavior = body ? body.style.scrollBehavior : '';
-
-            html.style.scrollBehavior = 'auto';
-            if (body) body.style.scrollBehavior = 'auto';
-
-            window.scrollTo(0, 0);
-            html.scrollTop = 0;
-            if (body) body.scrollTop = 0;
-
-            requestAnimationFrame(() => {
+            try {
+                scrollingElement.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+                document.body.scrollTop = 0;
                 window.scrollTo(0, 0);
-                html.scrollTop = 0;
-                if (body) body.scrollTop = 0;
-                html.style.scrollBehavior = previousHtmlBehavior;
-                if (body) body.style.scrollBehavior = previousBodyBehavior;
-            });
+            } catch (e) {
+                try { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); } catch (_) {}
+            }
         }
 
         function scrollToBottom() {
@@ -5197,6 +5183,42 @@ function toggleFaq(element) {
     goTop();
   }
   window.addEventListener('load', goTop, {once:true});
+})();
+</script>
+
+<script id="ya2too-mobile-top-button">
+(function () {
+    function bindTopButton() {
+        const btn = document.getElementById('scrollToTopButton');
+        if (!btn || btn.dataset.topBound === '1') return;
+        btn.dataset.topBound = '1';
+
+        const goTopNow = function (event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            scrollToTop();
+            // Double sécurité pour les navigateurs mobiles qui restaurent
+            // la position de scroll juste après le touchend.
+            requestAnimationFrame(function () { scrollToTop(); });
+            setTimeout(function () { scrollToTop(); }, 30);
+        };
+
+        btn.addEventListener('touchend', goTopNow, { passive: false });
+        btn.addEventListener('pointerup', function (event) {
+            if (event.pointerType === 'touch' || event.pointerType === 'pen') goTopNow(event);
+        }, { passive: false });
+        btn.addEventListener('click', function (event) {
+            goTopNow(event);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindTopButton, { once: true });
+    } else {
+        bindTopButton();
+    }
 })();
 </script>
 
