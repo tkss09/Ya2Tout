@@ -3639,6 +3639,70 @@ body.ci-lock-scroll { overflow: hidden !important; }
 .footer-end-logo img { image-rendering:auto; -webkit-backface-visibility:hidden; backface-visibility:hidden; }
 @media (max-width:700px){ .footer-end-logo img { max-width:125px; max-height:68px; } }
 </style>
+
+<style id="performance-fluid-optimization">
+/* Optimisations de rendu uniquement : ne changent ni les couleurs, ni les dimensions, ni la navigation. */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Réduit les recalculs/repeints des gros plans fixes et des overlays. */
+.bg-slideshow,
+.glow-bg,
+.page-scroll-buttons,
+#main-header,
+.modal-overlay,
+#cinematicIntro {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.bg-slideshow, .glow-bg {
+    transform: translate3d(0, 0, 0);
+    contain: paint;
+}
+
+/* Rend les grandes sections hors écran à la demande du navigateur. */
+#tutorial-section,
+.features-showcase,
+.reviews-section,
+#proof-section,
+#faq-section,
+footer {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 560px;
+}
+
+/* Préserve la fluidité tactile sans modifier l'apparence. */
+button, a, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 768px) {
+    /* Évite les micro-repeints sur les zones fixes lors du scroll mobile. */
+    .bg-slideshow,
+    .glow-bg,
+    #main-header,
+    .page-scroll-buttons,
+    #chatbot-widget {
+        transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    #tutorial-section,
+    .features-showcase,
+    .reviews-section,
+    #proof-section,
+    #faq-section,
+    footer {
+        contain: layout paint style;
+    }
+}
+</style>
+
 </head>
 <body>
 
@@ -5611,10 +5675,16 @@ function toggleFaq(element) {
 
         setInterval(nextSlide, 6000);
 
-        window.onload = () => {
+        function initializeInteractiveContent() {
             renderProducts();
             startAutoScroll();
-        };
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeInteractiveContent, { once: true });
+        } else {
+            initializeInteractiveContent();
+        }
     </script>
 <!-- ==========================================
      CHATBOT INTÉGRÉ - CODE MODIFIÉ (BAS GAUCHE)
@@ -5933,9 +6003,14 @@ function toggleFaq(element) {
     }
 
     // La bulle d'accueil disparaît dès que l'utilisateur commence à faire défiler la page.
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 20) hideChatbotGreeting();
-    }, { passive: true });
+    // Le listener se retire après le premier seuil atteint pour ne rien recalculer inutilement.
+    function hideChatbotGreetingOnScroll() {
+        if (window.scrollY > 20) {
+            hideChatbotGreeting();
+            window.removeEventListener('scroll', hideChatbotGreetingOnScroll);
+        }
+    }
+    window.addEventListener('scroll', hideChatbotGreetingOnScroll, { passive: true });
 
     function toggleChatbot() {
         const win = document.getElementById('chatbot-window');
@@ -6217,6 +6292,20 @@ function toggleFaq(element) {
     document.body.classList.add('ci-lock-scroll');
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
     else start();
+})();
+</script>
+
+
+<script id="performance-visibility-optimization">
+(function () {
+    function syncVisibility() {
+        if (document.hidden) {
+            if (typeof stopAutoScroll === 'function') stopAutoScroll();
+        } else {
+            if (typeof startAutoScroll === 'function') startAutoScroll();
+        }
+    }
+    document.addEventListener('visibilitychange', syncVisibility, { passive: true });
 })();
 </script>
 
