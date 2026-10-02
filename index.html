@@ -3747,6 +3747,8 @@ button, a, input, select, textarea {
     cursor:pointer;
     transition:background-color .2s ease,color .2s ease,transform .2s ease;
     touch-action:manipulation;
+    min-width:30px;
+    text-align:center;
 }
 .theme-switcher button:hover{ transform:translateY(-1px); }
 .theme-switcher button.active{
@@ -3872,14 +3874,18 @@ html.light-theme .product-card::after,
 html.light-theme header::after,
 html.light-theme footer::before{ opacity:.8; }
 html.light-theme .bg-slideshow::after{
+    /* Thème clair : filtre blanc transparent de la version précédente. */
     background:linear-gradient(180deg,rgba(255,255,255,.76),rgba(255,255,255,.88)) !important;
 }
 html.light-theme .glow-bg{
     opacity:.35;
 }
 
-/* Transition circulaire de navigation, depuis le bas-droite. */
+/* Transition circulaire de navigation — rendu premium, fluide et léger.
+   Animation uniquement sur transform (compositeur GPU), sans clip-path ni filtre
+   coûteux pendant le déplacement. Point d'origine fixe : bas-droite. */
 #pageCircleTransition{
+    --pct-duration: .58s;
     position:fixed;
     inset:0;
     z-index:2147482000;
@@ -3887,36 +3893,58 @@ html.light-theme .glow-bg{
     opacity:0;
     visibility:hidden;
     overflow:hidden;
+    contain:strict;
+    isolation:isolate;
+    transform:translateZ(0);
+    -webkit-transform:translateZ(0);
+}
+#pageCircleTransition::before{
+    content:"";
+    position:absolute;
+    width:100vmax;
+    height:100vmax;
+    right:0;
+    bottom:0;
+    border-radius:50%;
     background:
-        radial-gradient(circle at 100% 100%, rgba(255,196,85,.14), transparent 28%),
-        linear-gradient(135deg, rgba(220,38,38,.97), rgba(5,5,7,.99) 58%, #050507 100%);
-    clip-path:circle(0% at 100% 100%);
-    -webkit-clip-path:circle(0% at 100% 100%);
-    transition:clip-path .52s cubic-bezier(.16,.8,.2,1), opacity .18s ease, visibility 0s linear .52s;
+        radial-gradient(circle at 82% 82%, rgba(255,196,85,.18) 0 6%, rgba(255,116,0,.10) 17%, transparent 39%),
+        linear-gradient(135deg, rgba(220,38,38,.985) 0%, rgba(88,10,16,.99) 42%, rgba(5,5,7,.995) 76%, #050507 100%);
+    border:1px solid rgba(255,255,255,.08);
+    transform-origin:100% 100%;
+    transform:translate3d(0,0,0) scale(.001);
+    -webkit-transform:translate3d(0,0,0) scale(.001);
+    will-change:transform;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    transition:transform var(--pct-duration) cubic-bezier(.16,.84,.22,1);
+    -webkit-transition:-webkit-transform var(--pct-duration) cubic-bezier(.16,.84,.22,1);
 }
 #pageCircleTransition.pct-cover{
     opacity:1;
     visibility:visible;
-    clip-path:circle(155% at 100% 100%);
-    -webkit-clip-path:circle(155% at 100% 100%);
-    transition:clip-path .52s cubic-bezier(.16,.8,.2,1), opacity .12s ease;
+}
+#pageCircleTransition.pct-cover::before{
+    transform:translate3d(0,0,0) scale(2.28);
+    -webkit-transform:translate3d(0,0,0) scale(2.28);
 }
 #pageCircleTransition.pct-reveal{
     opacity:1;
     visibility:visible;
-    clip-path:circle(0% at 100% 100%);
-    -webkit-clip-path:circle(0% at 100% 100%);
-    transition:clip-path .52s cubic-bezier(.18,.72,.18,1), opacity .18s ease .42s;
+}
+#pageCircleTransition.pct-reveal::before{
+    transform:translate3d(0,0,0) scale(.001);
+    -webkit-transform:translate3d(0,0,0) scale(.001);
+    transition-timing-function:cubic-bezier(.18,.78,.22,1);
+    -webkit-transition-timing-function:cubic-bezier(.18,.78,.22,1);
 }
 @media (max-width:768px){
     .theme-switcher-label{ display:none; }
-    .theme-switcher button{ padding:5px 7px; font-size:.64rem; }
-    #pageCircleTransition{ transition-duration:.44s; }
-    #pageCircleTransition.pct-cover,
-    #pageCircleTransition.pct-reveal{ transition-duration:.44s; }
+    .theme-switcher button{ padding:5px 8px; min-width:30px; font-size:.82rem; line-height:1; }
+    #pageCircleTransition{ --pct-duration:.50s; }
+    #pageCircleTransition.pct-cover::before{ transform:translate3d(0,0,0) scale(2.34); -webkit-transform:translate3d(0,0,0) scale(2.34); }
 }
 @media (prefers-reduced-motion:reduce){
-    #pageCircleTransition{ transition:none !important; }
+    #pageCircleTransition::before{ transition:none !important; -webkit-transition:none !important; }
     .theme-switcher button{ transition:none !important; }
 }
 
@@ -4006,6 +4034,109 @@ html.light-theme #proofModal .proof-modal-close:focus-visible {
     }
 }
 </style>
+
+<style id="theme-light-all-white-anthracite-to-black">
+/* THÈME CLAIR — tout texte blanc ou anthracite devient noir.
+   Cette règle ne tourne pas pendant le scroll : uniquement lors du changement de thème. */
+html.light-theme{
+    --text-main:#000000;
+    --text-muted:#000000;
+}
+html.light-theme .light-theme-force-black{
+    color:#000000 !important;
+}
+/* Couleurs de texte neutres définies dans le CSS existant. */
+html.light-theme .announcement-bar,
+html.light-theme .stat-text h4,
+html.light-theme .btn-primary,
+html.light-theme .btn-secondary,
+html.light-theme .search-input,
+html.light-theme .duration-select,
+html.light-theme .duration-select option,
+html.light-theme .info-btn,
+html.light-theme .add-cart-btn,
+html.light-theme .carousel-btn,
+html.light-theme .step-number,
+html.light-theme .proof-modal-close,
+html.light-theme .modal-close-text,
+html.light-theme .service-card-text h4,
+html.light-theme .category-detail-badge,
+html.light-theme #modalOrderSummary,
+html.light-theme #popupOrderSummary,
+html.light-theme .chatbot-title,
+html.light-theme .chatbot-msg,
+html.light-theme .chatbot-input,
+html.light-theme .chatbot-button,
+html.light-theme .chatbot-avatar,
+html.light-theme .chatbot-send,
+html.light-theme .ci-skip,
+html.light-theme .nav-trial-btn{
+    color:#000000 !important;
+}
+/* Les styles inline blancs passent également en noir. */
+html.light-theme [style*="color: #fff"],
+html.light-theme [style*="color:#fff"],
+html.light-theme [style*="color: #ffffff"],
+html.light-theme [style*="color:#ffffff"],
+html.light-theme [style*="color: white"],
+html.light-theme [style*="color:white"],
+html.light-theme [style*="color: rgb(255, 255, 255)"],
+html.light-theme [style*="color:rgb(255, 255, 255)"]{
+    color:#000000 !important;
+}
+</style>
+<script id="theme-light-text-runtime-sync">
+(function(){
+    // Ne s'exécute qu'au changement de thème : aucune charge pendant le scroll.
+    const neutralTextColors = new Set([
+        'rgb(255, 255, 255)',
+        'rgb(17, 24, 39)',
+        'rgb(23, 23, 28)',
+        'rgb(51, 65, 85)',
+        'rgb(100, 116, 139)',
+        'rgb(226, 232, 240)',
+        'rgb(15, 23, 42)',
+        'rgb(31, 41, 55)',
+        'rgb(55, 65, 81)',
+        'rgb(71, 85, 105)',
+        'rgb(148, 163, 184)'
+    ]);
+
+    function hasDirectText(el){
+        for (const node of el.childNodes) {
+            if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) return true;
+        }
+        return false;
+    }
+
+    function syncAllText(){
+        const light = document.documentElement.classList.contains('light-theme');
+        if (!document.body) return;
+        document.body.querySelectorAll('*').forEach(function(el){
+            if (!hasDirectText(el)) return;
+            if (light) {
+                const color = getComputedStyle(el).color;
+                el.classList.toggle('light-theme-force-black', neutralTextColors.has(color));
+            } else {
+                el.classList.remove('light-theme-force-black');
+            }
+        });
+    }
+
+    window.__syncLightThemeText = syncAllText;
+
+    // Observe uniquement la classe du <html> : aucune surveillance du contenu ni du scroll.
+    const observer = new MutationObserver(function(){ syncAllText(); });
+    observer.observe(document.documentElement, {attributes:true, attributeFilter:['class']});
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', syncAllText, {once:true});
+    } else {
+        syncAllText();
+    }
+})();
+</script>
+
 </head>
 <body>
 
@@ -4079,9 +4210,8 @@ html.light-theme #proofModal .proof-modal-close:focus-visible {
             <li><span class="nav-trial-btn nav-trial-btn-blink" onclick="openTrialModal()">📋 Consultation</span></li>
             <li class="nav-theme-item">
                 <div class="theme-switcher" id="themeSwitcher" role="group" aria-label="Choisir le thème">
-                    <span class="theme-switcher-label">Thème</span>
-                    <button type="button" data-theme="dark" onclick="applySiteTheme('dark')" aria-label="Thème sombre">🌙 Sombre</button>
-                    <button type="button" data-theme="light" onclick="applySiteTheme('light')" aria-label="Thème clair">☀️ Clair</button>
+                    <button type="button" data-theme="dark" onclick="applySiteTheme('dark')" aria-label="Thème sombre" title="Thème sombre">🌙</button>
+                    <button type="button" data-theme="light" onclick="applySiteTheme('light')" aria-label="Thème clair" title="Thème clair">☀️</button>
                 </div>
             </li>
         </ul>
@@ -5535,25 +5665,31 @@ function applySiteTheme(theme) {
             }
 
             window.__pageCircleTransitionBusy = true;
-            overlay.classList.remove('pct-reveal');
-            overlay.classList.remove('pct-cover');
-            void overlay.offsetWidth;
-            overlay.classList.add('pct-cover');
+            overlay.classList.remove('pct-reveal', 'pct-cover');
 
-            window.setTimeout(() => {
-                try { if (typeof callback === 'function') callback(); } finally {
+            /* Double requestAnimationFrame : laisse le navigateur préparer la scène
+               sans forcer un reflow via offsetWidth. */
+            window.requestAnimationFrame(() => {
+                window.requestAnimationFrame(() => {
+                    overlay.classList.add('pct-cover');
+
                     window.setTimeout(() => {
-                        overlay.classList.remove('pct-cover');
-                        void overlay.offsetWidth;
-                        overlay.classList.add('pct-reveal');
-                        window.setTimeout(() => {
-                            overlay.classList.remove('pct-reveal');
-                            overlay.removeAttribute('style');
-                            window.__pageCircleTransitionBusy = false;
-                        }, 560);
-                    }, 35);
-                }
-            }, 535);
+                        try {
+                            if (typeof callback === 'function') callback();
+                        } finally {
+                            window.requestAnimationFrame(() => {
+                                overlay.classList.remove('pct-cover');
+                                overlay.classList.add('pct-reveal');
+
+                                window.setTimeout(() => {
+                                    overlay.classList.remove('pct-reveal');
+                                    window.__pageCircleTransitionBusy = false;
+                                }, 540);
+                            });
+                        }
+                    }, 600);
+                });
+            });
         }
 
         function openCategoryPage(catId, fromHistory = false, skipTransition = false) {
