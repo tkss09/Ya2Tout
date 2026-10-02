@@ -3703,6 +3703,309 @@ button, a, input, select, textarea {
 }
 </style>
 
+
+<script id="theme-preload">
+(function(){
+    try {
+        if (localStorage.getItem('numero1-theme') === 'light') {
+            document.documentElement.classList.add('light-theme');
+        }
+    } catch (e) {}
+})();
+</script>
+<style id="theme-system-style">
+/* =========================================================
+   THÈME — Sombre (par défaut) / Clair
+   ========================================================= */
+.theme-switcher{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    margin-left:2px;
+    padding:3px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    background:rgba(255,255,255,.035);
+    white-space:nowrap;
+    flex-shrink:0;
+}
+.theme-switcher-label{
+    padding:0 5px;
+    color:var(--text-muted);
+    font-size:.68rem;
+    font-weight:700;
+}
+.theme-switcher button{
+    border:0;
+    background:transparent;
+    color:var(--text-muted);
+    border-radius:999px;
+    padding:5px 8px;
+    min-height:28px;
+    font-size:.68rem;
+    font-weight:800;
+    cursor:pointer;
+    transition:background-color .2s ease,color .2s ease,transform .2s ease;
+    touch-action:manipulation;
+}
+.theme-switcher button:hover{ transform:translateY(-1px); }
+.theme-switcher button.active{
+    background:var(--accent);
+    color:#fff;
+    box-shadow:0 4px 12px var(--accent-glow);
+}
+
+/* Thème clair : conserve la mise en page et les accents rouges, change uniquement les surfaces/contrastes. */
+html.light-theme{
+    color-scheme:light;
+    --bg-main:#f7f7f9;
+    --card-bg:rgba(255,255,255,.92);
+    --accent:#dc2626;
+    --accent-glow:rgba(220,38,38,.18);
+    --border:rgba(15,23,42,.12);
+    --text-main:#111827;
+    --text-muted:#64748b;
+}
+html.light-theme body{
+    background-color:#f7f7f9;
+    color:#111827;
+}
+html.light-theme header{
+    background:rgba(255,255,255,.94) !important;
+    box-shadow:0 4px 20px rgba(15,23,42,.10) !important;
+    border-bottom-color:rgba(15,23,42,.10);
+}
+html.light-theme .nav-links li{ color:#64748b; }
+html.light-theme .nav-links li:hover,
+html.light-theme .nav-links li.active{ color:#111827; }
+html.light-theme .theme-switcher{ background:rgba(15,23,42,.035); }
+html.light-theme .hero-banner,
+html.light-theme .hero-stats-card,
+html.light-theme .compatibility-card,
+html.light-theme .product-card,
+html.light-theme .showcase-card,
+html.light-theme .tutorial-card,
+html.light-theme .review-card,
+html.light-theme .faq-item,
+html.light-theme .category-detail-hero,
+html.light-theme .category-features-panel,
+html.light-theme .category-service-card,
+html.light-theme .contact-modal,
+html.light-theme .proof-modal-dialog{
+    background:rgba(255,255,255,.94) !important;
+    color:#111827;
+    border-color:rgba(15,23,42,.10);
+    box-shadow:0 20px 50px rgba(15,23,42,.10);
+}
+html.light-theme .product-desc,
+html.light-theme .section-subtitle,
+html.light-theme .hero-banner p,
+html.light-theme .stat-text p,
+html.light-theme .showcase-card p,
+html.light-theme .tutorial-card p,
+html.light-theme .review-author,
+html.light-theme .category-detail-description,
+html.light-theme .category-services-heading p,
+html.light-theme .contact-modal p,
+html.light-theme .faq-answer,
+html.light-theme .footer-legal-links{
+    color:#64748b !important;
+}
+html.light-theme .category-service-card h4,
+html.light-theme .category-service-card p,
+html.light-theme .service-card-text h4,
+html.light-theme .service-card-text p,
+html.light-theme .category-features-grid li,
+html.light-theme .category-features-grid li i,
+html.light-theme .category-detail-meta span,
+html.light-theme .category-panel-title p,
+html.light-theme .category-services-count,
+html.light-theme .category-services-count span{
+    color:#334155 !important;
+}
+html.light-theme .category-service-card{
+    background:linear-gradient(110deg,rgba(255,255,255,.98),rgba(248,250,252,.96)) !important;
+}
+html.light-theme .category-features-panel{
+    background:linear-gradient(145deg,rgba(220,38,38,.05),rgba(255,255,255,.92)) !important;
+}
+
+html.light-theme .product-title,
+html.light-theme .section-title,
+html.light-theme .hero-banner h1,
+html.light-theme .showcase-card h3,
+html.light-theme .tutorial-card h3,
+html.light-theme .review-text,
+html.light-theme .category-detail-hero h1,
+html.light-theme .category-services-heading h2,
+html.light-theme .contact-modal h3,
+html.light-theme .stat-text h4,
+html.light-theme .faq-question{
+    color:#111827;
+}
+html.light-theme .search-bar-container,
+html.light-theme .search-input,
+html.light-theme .duration-select{
+    background-color:rgba(255,255,255,.90);
+    color:#111827;
+}
+html.light-theme .search-input::placeholder{ color:#94a3b8; }
+html.light-theme .btn-secondary,
+html.light-theme .info-btn,
+html.light-theme .carousel-btn{
+    background:rgba(15,23,42,.035);
+    color:#111827;
+    border-color:rgba(15,23,42,.12);
+}
+html.light-theme .scroll-btn{
+    background:rgba(255,255,255,.92);
+    color:#111827;
+    border-color:rgba(15,23,42,.12);
+}
+html.light-theme footer{
+    background:rgba(255,255,255,.96);
+    color:#64748b;
+    border-top-color:rgba(15,23,42,.10);
+}
+html.light-theme .footer-content p{ color:#64748b; }
+html.light-theme .product-card::after,
+html.light-theme header::after,
+html.light-theme footer::before{ opacity:.8; }
+html.light-theme .bg-slideshow::after{
+    background:linear-gradient(180deg,rgba(255,255,255,.76),rgba(255,255,255,.88)) !important;
+}
+html.light-theme .glow-bg{
+    opacity:.35;
+}
+
+/* Transition circulaire de navigation, depuis le bas-droite. */
+#pageCircleTransition{
+    position:fixed;
+    inset:0;
+    z-index:2147482000;
+    pointer-events:none;
+    opacity:0;
+    visibility:hidden;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 100% 100%, rgba(255,196,85,.14), transparent 28%),
+        linear-gradient(135deg, rgba(220,38,38,.97), rgba(5,5,7,.99) 58%, #050507 100%);
+    clip-path:circle(0% at 100% 100%);
+    -webkit-clip-path:circle(0% at 100% 100%);
+    transition:clip-path .52s cubic-bezier(.16,.8,.2,1), opacity .18s ease, visibility 0s linear .52s;
+}
+#pageCircleTransition.pct-cover{
+    opacity:1;
+    visibility:visible;
+    clip-path:circle(155% at 100% 100%);
+    -webkit-clip-path:circle(155% at 100% 100%);
+    transition:clip-path .52s cubic-bezier(.16,.8,.2,1), opacity .12s ease;
+}
+#pageCircleTransition.pct-reveal{
+    opacity:1;
+    visibility:visible;
+    clip-path:circle(0% at 100% 100%);
+    -webkit-clip-path:circle(0% at 100% 100%);
+    transition:clip-path .52s cubic-bezier(.18,.72,.18,1), opacity .18s ease .42s;
+}
+@media (max-width:768px){
+    .theme-switcher-label{ display:none; }
+    .theme-switcher button{ padding:5px 7px; font-size:.64rem; }
+    #pageCircleTransition{ transition-duration:.44s; }
+    #pageCircleTransition.pct-cover,
+    #pageCircleTransition.pct-reveal{ transition-duration:.44s; }
+}
+@media (prefers-reduced-motion:reduce){
+    #pageCircleTransition{ transition:none !important; }
+    .theme-switcher button{ transition:none !important; }
+}
+
+<style id="theme-light-text-contrast-fix">
+/* =========================================================
+   THÈME CLAIR — contraste renforcé des textes blancs
+   Les textes qui étaient blancs sur des surfaces devenues
+   blanches passent automatiquement en noir/anthracite.
+   Les textes sur fonds rouges/noirs restent volontairement
+   blancs pour conserver leur contraste.
+   ========================================================= */
+html.light-theme .stat-text h4,
+html.light-theme .service-card-text h4,
+html.light-theme .search-input,
+html.light-theme .duration-select,
+html.light-theme .duration-select option,
+html.light-theme .step-number,
+html.light-theme .info-btn,
+html.light-theme .carousel-btn,
+html.light-theme .scroll-btn {
+    color: #111827 !important;
+}
+
+/* Le fond du menu déroulant devient aussi clair pour garder
+   une lecture nette sur PC comme sur smartphone. */
+html.light-theme .duration-select option {
+    background: #ffffff !important;
+}
+
+/* Textes blancs injectés dans les fenêtres de dialogue. */
+html.light-theme .contact-modal p[style*="color: #fff"],
+html.light-theme .contact-modal p[style*="color:#fff"],
+html.light-theme .contact-modal p[style*="color: #ffffff"],
+html.light-theme .contact-modal p[style*="color:#ffffff"] {
+    color: #111827 !important;
+}
+
+/* Le titre de la section Retours Clients ne reste jamais blanc en thème clair. */
+html.light-theme #retours-section h2[style*="color: #ffffff"],
+html.light-theme #retours-section h2[style*="color:#ffffff"],
+html.light-theme #retours-section h2[style*="color: #fff"],
+html.light-theme #retours-section h2[style*="color:#fff"] {
+    color: #111827 !important;
+}
+
+/* Renforce la lisibilité des éléments textuels secondaires restés hérités en blanc. */
+html.light-theme .product-card .product-title,
+html.light-theme .product-card .product-desc,
+html.light-theme .tutorial-card h3,
+html.light-theme .review-card .review-text,
+html.light-theme .faq-item .faq-question,
+html.light-theme .faq-item .faq-answer,
+html.light-theme .category-detail-hero h1,
+html.light-theme .category-panel-title h3,
+html.light-theme .category-service-card h4,
+html.light-theme .category-service-card p {
+    color: #111827 !important;
+}
+
+/* Les boutons rouges gardent leur contraste blanc. */
+html.light-theme .btn-primary,
+html.light-theme .add-cart-btn,
+html.light-theme .nav-trial-btn:hover,
+html.light-theme .search-clear-btn:hover,
+html.light-theme .carousel-btn:hover {
+    color: #fff !important;
+}
+
+/* Les overlays très sombres (photos/vidéos et badges superposés)
+   conservent leur texte clair : le changement de thème ne dégrade
+   pas leur contraste. */
+html.light-theme .category-detail-badge,
+html.light-theme #proofModal .proof-modal-close:hover,
+html.light-theme #proofModal .proof-modal-close:focus-visible {
+    color: #fff !important;
+}
+
+@media (max-width: 768px) {
+    /* Aucun calcul/animation supplémentaire pendant le scroll :
+       uniquement des règles CSS, donc coût quasi nul sur smartphone. */
+    html.light-theme .stat-text h4,
+    html.light-theme .service-card-text h4,
+    html.light-theme .search-input,
+    html.light-theme .duration-select,
+    html.light-theme .duration-select option {
+        color: #111827 !important;
+    }
+}
+</style>
 </head>
 <body>
 
@@ -3740,6 +4043,9 @@ button, a, input, select, textarea {
         </button>
     </div>
 
+<!-- Transition circulaire entre la page principale et la page dédiée -->
+<div id="pageCircleTransition" aria-hidden="true"></div>
+
 <header id="main-header" style="position: fixed; top: 0; left: 0; width: 100%; max-width: 100vw; box-sizing: border-box; z-index: 1000; background-color: var(--bg-color, #121212); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease; contain: layout paint;">
     <!-- Style CSS pour l'effet de clignotement du bouton -->
     <style>
@@ -3771,6 +4077,13 @@ button, a, input, select, textarea {
             <li onclick="showMainPage(); setTimeout(() => scrollToNavSection('faq-section'), 80)">FAQ</li>
             <!-- Bouton Consultation clignotant -->
             <li><span class="nav-trial-btn nav-trial-btn-blink" onclick="openTrialModal()">📋 Consultation</span></li>
+            <li class="nav-theme-item">
+                <div class="theme-switcher" id="themeSwitcher" role="group" aria-label="Choisir le thème">
+                    <span class="theme-switcher-label">Thème</span>
+                    <button type="button" data-theme="dark" onclick="applySiteTheme('dark')" aria-label="Thème sombre">🌙 Sombre</button>
+                    <button type="button" data-theme="light" onclick="applySiteTheme('light')" aria-label="Thème clair">☀️ Clair</button>
+                </div>
+            </li>
         </ul>
     </div>
 </header>
@@ -5195,9 +5508,60 @@ button, a, input, select, textarea {
             });
         }
 
-function openCategoryPage(catId, fromHistory = false) {
+function applySiteTheme(theme) {
+            const nextTheme = theme === 'light' ? 'light' : 'dark';
+            const root = document.documentElement;
+            root.classList.toggle('light-theme', nextTheme === 'light');
+            try { localStorage.setItem('numero1-theme', nextTheme); } catch (e) {}
+
+            document.querySelectorAll('#themeSwitcher button[data-theme]').forEach(btn => {
+                const active = btn.dataset.theme === nextTheme;
+                btn.classList.toggle('active', active);
+                btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+            });
+        }
+
+        function initSiteTheme() {
+            let theme = 'dark';
+            try { theme = localStorage.getItem('numero1-theme') === 'light' ? 'light' : 'dark'; } catch (e) {}
+            applySiteTheme(theme);
+        }
+
+        function runPageCircleTransition(callback) {
+            const overlay = document.getElementById('pageCircleTransition');
+            if (!overlay || window.__pageCircleTransitionBusy) {
+                if (typeof callback === 'function') callback();
+                return;
+            }
+
+            window.__pageCircleTransitionBusy = true;
+            overlay.classList.remove('pct-reveal');
+            overlay.classList.remove('pct-cover');
+            void overlay.offsetWidth;
+            overlay.classList.add('pct-cover');
+
+            window.setTimeout(() => {
+                try { if (typeof callback === 'function') callback(); } finally {
+                    window.setTimeout(() => {
+                        overlay.classList.remove('pct-cover');
+                        void overlay.offsetWidth;
+                        overlay.classList.add('pct-reveal');
+                        window.setTimeout(() => {
+                            overlay.classList.remove('pct-reveal');
+                            overlay.removeAttribute('style');
+                            window.__pageCircleTransitionBusy = false;
+                        }, 560);
+                    }, 35);
+                }
+            }, 535);
+        }
+
+        function openCategoryPage(catId, fromHistory = false, skipTransition = false) {
             const cat = categories.find(c => c.id === catId);
             if (!cat) return;
+            if (!skipTransition) {
+                return runPageCircleTransition(() => openCategoryPage(catId, fromHistory, true));
+            }
 
             // Crée une entrée dans l'historique pour que le bouton ← PC/mobile
             // puisse revenir proprement à la page d'accueil.
@@ -5319,7 +5683,10 @@ function openCategoryServiceInfo(catId, serviceIdx) {
             }
         }
 
-        function showMainPage() {
+        function showMainPage(withTransition = false) {
+            if (withTransition) {
+                return runPageCircleTransition(() => showMainPage(false));
+            }
             document.body.classList.remove('category-detail-active'); document.getElementById('categoryDetailPageContainer').style.display = 'none';
             document.getElementById('mainPageContainer').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -5355,7 +5722,7 @@ function openCategoryServiceInfo(catId, serviceIdx) {
             if (history.state && history.state.page === 'category') {
                 history.back();
             } else {
-                showMainPage();
+                showMainPage(true);
             }
         }
 
@@ -6223,7 +6590,7 @@ function toggleFaq(element) {
         if (event.state && event.state.page === 'category' && event.state.category) {
             openCategoryPage(event.state.category, true);
         } else {
-            showMainPage();
+            showMainPage(true);
         }
     });
 })();
@@ -6306,6 +6673,16 @@ function toggleFaq(element) {
         }
     }
     document.addEventListener('visibilitychange', syncVisibility, { passive: true });
+})();
+</script>
+
+<script id="theme-system-script">
+(function(){
+    function boot(){
+        initSiteTheme();
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once:true});
+    else boot();
 })();
 </script>
 
