@@ -4112,6 +4112,73 @@ html.light-theme [style*="color:rgb(255, 255, 255)"]{
 })();
 </script>
 
+
+<style id="cinematic-skip-light-visibility-fix">
+/* Thème clair : le bouton PASSER reste très visible sur l'ouverture cinématique. */
+html.light-theme #cinematicIntro .ci-skip {
+    color: #000000 !important;
+    background: rgba(255,255,255,0.92) !important;
+    border: 1px solid rgba(0,0,0,0.28) !important;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.28), 0 1px 3px rgba(0,0,0,0.18) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 64px;
+    min-height: 36px;
+    z-index: 2147483002 !important;
+}
+html.light-theme #cinematicIntro .ci-skip:hover,
+html.light-theme #cinematicIntro .ci-skip:focus-visible {
+    color: #000000 !important;
+    background: #ffffff !important;
+    border-color: rgba(0,0,0,0.42) !important;
+    box-shadow: 0 8px 26px rgba(0,0,0,0.32), 0 1px 4px rgba(0,0,0,0.2) !important;
+}
+@media (max-width: 600px) {
+    html.light-theme #cinematicIntro .ci-skip {
+        right: max(14px, env(safe-area-inset-right)) !important;
+        bottom: max(14px, env(safe-area-inset-bottom)) !important;
+        min-width: 66px;
+        min-height: 38px;
+        padding: 8px 13px !important;
+        font-size: 12px !important;
+    }
+}
+</style>
+
+
+<style id="light-theme-anthracite-borders">
+/* THÈME CLAIR — bordures anthracite des sections demandées. */
+html.light-theme #catalog-section #productGrid .product-card,
+html.light-theme #tutorial-section .tutorial-card,
+html.light-theme .features-showcase .showcase-card,
+html.light-theme .reviews-section .review-card,
+html.light-theme #proof-section .proof-card,
+html.light-theme #faq-section .faq-item {
+    border-color: #374151 !important;
+}
+
+/* Les zones photo/vidéo de Retours Clients gardent aussi une bordure nette. */
+html.light-theme #proof-section .client-proof-card,
+html.light-theme #proof-section .proof-card,
+html.light-theme #proof-section img,
+html.light-theme #proof-section video {
+    border-color: #374151 !important;
+}
+
+/* Petit renfort visuel des bordures au passage de la souris, sans animation lourde. */
+html.light-theme #catalog-section #productGrid .product-card:hover,
+html.light-theme #tutorial-section .tutorial-card:hover,
+html.light-theme .features-showcase .showcase-card:hover,
+html.light-theme .reviews-section .review-card:hover,
+html.light-theme #proof-section .proof-card:hover,
+html.light-theme #faq-section .faq-item:hover {
+    border-color: #374151 !important;
+}
+</style>
+
 </head>
 <body>
 
