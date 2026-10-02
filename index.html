@@ -5003,6 +5003,198 @@ html.light-theme #faq-section .faq-item:hover {
 }
 </style>
 
+
+<style id="service-piece-fan-final">
+/* Mise en éventail — dernière finition : cartes aérées, lisibles et rapprochées des stats */
+.service-piece-teaser{
+  height:286px !important;
+  margin-top:34px !important;
+  margin-bottom:-2px !important;
+  overflow:visible !important;
+}
+.service-piece-teaser__portant{
+  overflow:visible !important;
+  width:100% !important;
+}
+.service-piece{
+  transform-origin:50% 88% !important;
+  will-change:transform !important;
+  transition:transform .38s cubic-bezier(.22,.85,.25,1), box-shadow .28s ease !important;
+}
+/* Éventail desktop : gauche légèrement inclinée, centre droit, droite inclinée */
+@media (min-width:901px){
+  .service-piece--left{
+    left:17% !important;
+    top:52px !important;
+    transform:rotateZ(-11deg) translateZ(0) !important;
+    z-index:2 !important;
+  }
+  .service-piece--center{
+    left:50% !important;
+    top:2px !important;
+    transform:translateX(-50%) rotateZ(0deg) translateZ(28px) !important;
+    z-index:4 !important;
+  }
+  .service-piece--right{
+    right:17% !important;
+    left:auto !important;
+    top:52px !important;
+    transform:rotateZ(11deg) translateZ(0) !important;
+    z-index:2 !important;
+  }
+  .service-piece--left:hover,
+  .service-piece--left:focus-visible{
+    transform:translateY(-7px) rotateZ(-8deg) scale(1.018) !important;
+    z-index:5 !important;
+  }
+  .service-piece--center:hover,
+  .service-piece--center:focus-visible{
+    transform:translateX(-50%) translateY(-6px) translateZ(38px) scale(1.02) !important;
+    z-index:6 !important;
+  }
+  .service-piece--right:hover,
+  .service-piece--right:focus-visible{
+    transform:translateY(-7px) rotateZ(8deg) scale(1.018) !important;
+    z-index:5 !important;
+  }
+}
+/* Tablette */
+@media (min-width:701px) and (max-width:900px){
+  .service-piece-teaser{
+    height:264px !important;
+    margin-top:24px !important;
+    margin-bottom:-8px !important;
+  }
+  .service-piece--left{
+    left:12% !important;
+    top:48px !important;
+    transform:rotateZ(-9deg) !important;
+  }
+  .service-piece--center{
+    left:50% !important;
+    top:6px !important;
+    transform:translateX(-50%) translateZ(22px) !important;
+  }
+  .service-piece--right{
+    right:12% !important;
+    left:auto !important;
+    top:48px !important;
+    transform:rotateZ(9deg) !important;
+  }
+}
+/* Smartphone : éventail compact, sans débordement sur les bords */
+@media (max-width:700px){
+  .service-piece-teaser{
+    height:185px !important;
+    margin:20px auto -8px !important;
+  }
+  .service-piece{
+    transform-origin:50% 88% !important;
+  }
+  .service-piece--left{
+    left:3% !important;
+    right:auto !important;
+    top:34px !important;
+    transform:rotateZ(-8deg) !important;
+    z-index:2 !important;
+  }
+  .service-piece--center{
+    left:50% !important;
+    top:2px !important;
+    transform:translateX(-50%) translateZ(18px) !important;
+    z-index:4 !important;
+  }
+  .service-piece--right{
+    right:3% !important;
+    left:auto !important;
+    top:34px !important;
+    transform:rotateZ(8deg) !important;
+    z-index:2 !important;
+  }
+  .service-piece--left:hover,
+  .service-piece--left:focus-visible{
+    transform:rotateZ(-8deg) !important;
+  }
+  .service-piece--center:hover,
+  .service-piece--center:focus-visible{
+    transform:translateX(-50%) translateZ(18px) !important;
+  }
+  .service-piece--right:hover,
+  .service-piece--right:focus-visible{
+    transform:rotateZ(8deg) !important;
+  }
+  .hero-stats-card{
+    margin-top:-20px !important;
+  }
+}
+@media (max-width:420px){
+  .service-piece-teaser{
+    height:164px !important;
+    margin-top:14px !important;
+    margin-bottom:-10px !important;
+  }
+  .service-piece--left,
+  .service-piece--right{
+    top:29px !important;
+  }
+  .service-piece--left{left:2% !important;}
+  .service-piece--right{right:2% !important;}
+  .service-piece--center{top:0 !important;}
+  .hero-stats-card{margin-top:-18px !important;}
+}
+@media (max-width:380px){
+  .service-piece-teaser{
+    height:151px !important;
+    margin-top:10px !important;
+    margin-bottom:-9px !important;
+  }
+  .hero-stats-card{margin-top:-16px !important;}
+}
+@media (prefers-reduced-motion:reduce){
+  .service-piece{transition:none !important;}
+}
+</style>
+
+
+<style id="service-piece-rounding-final">
+/* Coins parfaitement arrondis sur les cartes services, en thème sombre comme clair. */
+.service-piece{
+  border-radius:24px !important;
+  overflow:hidden !important;
+  clip-path:inset(0 round 24px) !important;
+  -webkit-clip-path:inset(0 round 24px) !important;
+  background-clip:padding-box !important;
+  -webkit-mask-image:-webkit-radial-gradient(white, black) !important;
+  isolation:isolate !important;
+}
+.service-piece::before,
+.service-piece::after,
+.service-piece__image,
+.service-piece__edge{
+  border-radius:inherit !important;
+  clip-path:inset(0 round 24px) !important;
+  -webkit-clip-path:inset(0 round 24px) !important;
+}
+.service-piece__image{
+  inset:-1px !important;
+  width:calc(100% + 2px) !important;
+  height:calc(100% + 2px) !important;
+}
+@media (max-width:700px){
+  .service-piece{
+    border-radius:18px !important;
+    clip-path:inset(0 round 18px) !important;
+    -webkit-clip-path:inset(0 round 18px) !important;
+  }
+  .service-piece::before,
+  .service-piece::after,
+  .service-piece__image,
+  .service-piece__edge{
+    clip-path:inset(0 round 18px) !important;
+    -webkit-clip-path:inset(0 round 18px) !important;
+  }
+}
+</style>
 </head>
 <body>
 
